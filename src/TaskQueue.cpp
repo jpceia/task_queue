@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/10 23:09:38 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/11 15:16:16 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "LockGuard.hpp"
 #include <pthread.h>
 
-TaskQueue::TaskQueue()
+TaskQueue::TaskQueue() :
+    _stopped(false)
 {
 }
 
@@ -38,8 +39,6 @@ void TaskQueue::push(Task *task)
 {
     {
         LockGuard lock(_mutex);
-        if (_stopped)
-            return;
         _queue.push(task);
     }
     _cond.signal();
@@ -48,12 +47,11 @@ void TaskQueue::push(Task *task)
 Task* TaskQueue::pop()
 {
     LockGuard lock(_mutex);
-    while (_queue.empty())
-    {
-        if (_stopped)
-            return NULL;
+
+    while (_queue.empty() && !_stopped)
         _cond.wait(_mutex);
-    }
+    if (_queue.empty())
+        return NULL;
     Task *task = _queue.front();
     _queue.pop();
     return task;
