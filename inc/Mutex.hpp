@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 22:57:44 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/10 23:11:23 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/11 01:03:38 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ private:
     Mutex(Mutex const &rhs) : _mutex(rhs._mutex) {};
     Mutex &operator=(Mutex const &rhs) { (void)rhs; return *this; }
 
+    // Private attributes
     pthread_mutex_t _mutex;
 };
 

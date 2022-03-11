@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ConditionVariable.hpp                                      :+:      :+:    :+:   */
+/*   ConditionVariable.hpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 22:59:47 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/10 23:04:19 by jpceia           ###   ########.fr       */
+/*   Created: 2022/03/10 23:17:27 by jpceia            #+#    #+#             */
+/*   Updated: 2022/03/11 01:03:53 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ private:
     ConditionVariable(ConditionVariable const &rhs) : _cond(rhs._cond) {};
     ConditionVariable &operator=(ConditionVariable const &rhs) { (void)rhs; return *this; }
 
+    // Private attributes
     pthread_cond_t _cond;
 };
 

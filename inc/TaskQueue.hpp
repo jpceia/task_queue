@@ -36,6 +36,7 @@ private:
     TaskQueue(TaskQueue const &rhs);
     TaskQueue &operator=(TaskQueue const &rhs);
 
+    // Private attributes
     std::queue<Task *> _queue;
     Mutex _mutex;
     ConditionVariable _cond;
