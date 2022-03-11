@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:14:16 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/11 15:22:19 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/11 15:27:42 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ public:
     void run()
     {
         sleep(1);
-        _mutex.lock();
+        LockGuard lock(_mutex);
         std::cout << "MyTask " << _id << " is running" << std::endl;
-        _mutex.unlock();
     }
 
 private:
