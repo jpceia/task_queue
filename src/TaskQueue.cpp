@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/11 15:16:16 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/11 15:30:38 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ TaskQueue& TaskQueue::operator=(TaskQueue const &rhs)
 
 void TaskQueue::push(Task *task)
 {
+    if (_stopped)
+        return;
+    if (task == NULL)
+    {
+        _stopped = true;
+        _cond.broadcast();
+        return;
+    }
+    else
     {
         LockGuard lock(_mutex);
         _queue.push(task);
@@ -60,10 +69,4 @@ Task* TaskQueue::pop()
 bool TaskQueue::isStopped()
 {
     return _stopped;
-}
-
-void TaskQueue::stop()
-{
-    _stopped = true;
-    _cond.broadcast();
 }

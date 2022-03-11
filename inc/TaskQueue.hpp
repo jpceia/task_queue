@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/11 15:13:01 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/11 15:30:50 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ public:
 
     void push(Task *task);
     Task *pop();
-    void stop();
     bool isStopped();
 
 private:
