@@ -6,11 +6,11 @@
 #    By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 23:37:29 by jceia             #+#    #+#              #
-#    Updated: 2022/03/10 23:14:28 by jpceia           ###   ########.fr        #
+#    Updated: 2022/03/11 15:56:30 by jpceia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = task_queue
+NAME        = work_manager
 
 INC_DIR     = inc
 SRC_DIR     = src
