@@ -6,36 +6,15 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:14:16 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/11 15:23:16 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/11 15:22:19 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Task.hpp"
-#include "TaskQueue.hpp"
-#include <pthread.h>
+#include "WorkManager.hpp"
 #include <iostream>
 #include <unistd.h>
 
-void* WorkerThread(void *ptr)
-{
-    TaskQueue* taskQueue = (TaskQueue*)ptr;
-    while (true)
-    {
-        Task *task = taskQueue->pop();
-        if (!task)
-            break ;
-        try 
-        {
-            task->run();
-        }
-        catch (std::exception& e)
-        {
-            std::cerr << "Exception: " << e.what() << std::endl;
-        }
-        delete task;
-    }
-    return NULL;
-}
 
 class MyTask : public Task
 {
@@ -64,15 +43,11 @@ private:
 int main()
 {
     std::cout << "Hello World!" << std::endl;
-    TaskQueue taskQueue;
-    std::vector<pthread_t> threads(5, 0);
+    WorkManager manager(5);
     Mutex mutex;
-    for (size_t i = 0; i < threads.size(); ++i)
-        pthread_create(&threads[i], NULL, WorkerThread, &taskQueue);
     for (size_t i = 0; i < 50; ++i)
-        taskQueue.push(new MyTask(i, mutex));
-    taskQueue.stop();
-    for (size_t i = 0; i < threads.size(); ++i)
-        pthread_join(threads[i], NULL);
+        manager.push_task(new MyTask(i, mutex));
+    manager.push_task(NULL);
+    manager.init();
     return 0;
 }
