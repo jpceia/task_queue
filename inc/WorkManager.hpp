@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/24 15:18:41 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:36:54 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "ConditionVariable.hpp"
 #include "Task.hpp"
 #include "TaskQueue.hpp"
+#include <vector>
 
 void* WorkerThread(void *ptr);
 
@@ -36,7 +37,6 @@ private:
     
     // Private attributes
     TaskQueue _taskQueue;
-    pthread_t* _workers;
-    const int _numWorkers;
+    std::vector<pthread_t> _workers;
     bool _running;
 };

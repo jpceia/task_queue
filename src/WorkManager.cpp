@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/24 15:18:32 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:38:58 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ void* WorkerThread(void *ptr)
 }
 
 WorkManager::WorkManager(int numWorkers) :
-    _workers(new pthread_t[numWorkers]),
-    _numWorkers(numWorkers),
+    _workers(numWorkers),
     _running(false)
 {
 }
 
 WorkManager::WorkManager(WorkManager const &rhs) :
-    _numWorkers(rhs._numWorkers),
+    _workers(rhs._workers),
     _running(rhs._running)
 {
     *this = rhs;
@@ -54,7 +53,6 @@ WorkManager::WorkManager(WorkManager const &rhs) :
 WorkManager::~WorkManager()
 {
     this->wait();
-    delete[] _workers;
 }
 
 WorkManager& WorkManager::operator=(WorkManager const &rhs)
@@ -67,8 +65,9 @@ void WorkManager::wait()
 {
     if (!_running)
         return ;
-    for (int i = 0; i < _numWorkers; i++)
-        pthread_join(_workers[i], NULL);
+    for (std::vector<pthread_t>::const_iterator it = _workers.begin();
+        it != _workers.end(); ++it)
+        pthread_join(*it, NULL);
     _running = false;
 }
 
@@ -76,8 +75,9 @@ void WorkManager::init()
 {
     if (_running)
         return ;
-    for (int i = 0; i < _numWorkers; i++)
-        pthread_create(&_workers[i], NULL, WorkerThread, (void*)&_taskQueue);
+    for (std::vector<pthread_t>::iterator it = _workers.begin();
+        it != _workers.end(); ++it)
+        pthread_create(&*it, NULL, WorkerThread, (void*)&_taskQueue);
     _running = true;
 }
 
