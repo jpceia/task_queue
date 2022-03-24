@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/24 18:50:23 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/24 18:54:46 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ public:
     TaskPool& operator=(const TaskPool& rhs);
 
     void erase(Task *task);
+    void reset();
 
 private:
     Mutex _mutex;
