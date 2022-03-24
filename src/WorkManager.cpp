@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/11 15:31:00 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:18:32 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,9 @@ void WorkManager::init()
 void WorkManager::push_task(Task* task)
 {
     _taskQueue.push(task);
+}
+
+void WorkManager::reset()
+{
+    _taskQueue.reset();
 }

@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/11 01:06:59 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:18:41 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ public:
     void init();
     void wait();
     void push_task(Task* task);
+    void reset();
     
 private:
     // Non-copyable

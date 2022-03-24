@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/11 15:30:38 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:18:04 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,17 @@ Task* TaskQueue::pop()
 bool TaskQueue::isStopped()
 {
     return _stopped;
+}
+
+void TaskQueue::reset()
+{
+    // Delete all pending tasks
+    while (!_queue.empty())
+    {
+        Task* task = _queue.front();
+        if (task != NULL)
+            delete task;
+        _queue.pop();
+    }
+    _stopped = false;
 }
