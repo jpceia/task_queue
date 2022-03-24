@@ -57,8 +57,7 @@ Task* TaskQueue::pop()
 {
     LockGuard lock(_mutex);
 
-    while (_queue.empty() && !_stopped)
-        _cond.wait(_mutex);
+        _cond.wait();
     if (_queue.empty())
         return NULL;
     Task *task = _queue.front();
