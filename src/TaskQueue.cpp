@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/24 15:18:04 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/24 15:35:35 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void TaskQueue::push(Task *task)
 Task* TaskQueue::pop()
 {
     LockGuard lock(_mutex);
-
+    while (_queue.empty() && !_stopped)
         _cond.wait();
     if (_queue.empty())
         return NULL;
