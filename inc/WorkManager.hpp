@@ -17,8 +17,6 @@
 #include "TaskQueue.hpp"
 #include <vector>
 
-void* WorkerThread(void *ptr);
-
 class WorkManager
 {
 public:
@@ -34,6 +32,9 @@ private:
     // Non-copyable
     WorkManager(WorkManager const &rhs);
     WorkManager &operator=(WorkManager const &rhs);
+
+    // thread functions
+    static void *WorkerThread(void *ptr);
     
     // Private attributes
     TaskQueue _taskQueue;

@@ -15,13 +15,14 @@
 #include "WorkManager.hpp"
 #include <iostream>
 
-void* WorkerThread(void *ptr)
+void* WorkManager::WorkerThread(void *ptr)
 {
-    TaskQueue* taskQueue = (TaskQueue*)ptr;
+    WorkManager* wm = (WorkManager *)ptr;
+    TaskQueue& taskQueue = wm->_taskQueue;
 
     while (true)
     {
-        Task *task = taskQueue->pop();
+        Task *task = taskQueue.pop();
         if (!task)
             break ;
         try 
@@ -77,7 +78,7 @@ void WorkManager::init()
         return ;
     for (std::vector<pthread_t>::iterator it = _workers.begin();
         it != _workers.end(); ++it)
-        pthread_create(&*it, NULL, WorkerThread, (void*)&_taskQueue);
+        pthread_create(&*it, NULL, WorkerThread, (void*)this);
     _running = true;
 }
 
