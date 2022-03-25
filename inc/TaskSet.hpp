@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 21:36:18 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 23:23:05 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "Mutex.hpp"
 # include "LockGuard.hpp"
 # include <set>
-
+# include <vector>
 
 class TaskSet
 {
@@ -27,6 +27,7 @@ public:
     virtual ~TaskSet();
     TaskSet& operator=(const TaskSet& rhs);
 
+    std::vector<Task*> getUnlockedTasks();
     size_t erase(Task *task);
     bool insert(Task *task);
     bool empty() const;

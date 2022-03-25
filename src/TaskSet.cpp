@@ -34,6 +34,18 @@ TaskSet& TaskSet::operator=(const TaskSet& rhs)
     return *this;
 }
 
+std::vector<Task*> TaskSet::getUnlockedTasks()
+{
+    std::vector<Task *> tasks;
+    for (Task::Set::iterator it = _set.begin(); it != _set.end(); ++it)
+    {
+        if ((*it)->isLocked())
+            continue ;
+        tasks.push_back(*it);
+    }
+    return tasks;
+}
+
 size_t TaskSet::erase(Task *task)
 {
     LockGuard lock(_mutex);
