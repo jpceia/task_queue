@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 21:29:08 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 21:32:33 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,15 @@ void WorkManager::start()
 
 void WorkManager::push_task(Task* task)
 {
+    if (!_accepting_work)
+    {
+        std::cerr << "WorkManager::push_task() called while not accepting work" << std::endl;
+        return ;
+    }
+    if (task == NULL)
+    {
+        std::cerr << "WorkManager::push_task() called with NULL task" << std::endl;
+        return ;
+    }   
     _taskQueue.push(task);
 }
