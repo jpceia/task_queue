@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 21:39:16 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 23:45:18 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ private:
 
     // thread functions
     static void *WorkerThread(void *ptr);
+
+    void _finish_task(Task *task);
     
     // Private attributes
     TaskQueue _taskQueue;

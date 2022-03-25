@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 23:40:58 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 23:53:10 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void* WorkManager::WorkerThread(void *ptr)
 {
     WorkManager* wm = (WorkManager *)ptr;
     TaskQueue& taskQueue = wm->_taskQueue;
-    TaskSet& lockedTasks = wm->_lockedTasks;
     bool& wait = wm->_accepting_work;
 
     while (true)
@@ -35,19 +34,7 @@ void* WorkManager::WorkerThread(void *ptr)
         {
             std::cerr << "Exception: " << e.what() << std::endl;
         }
-        // Get dependent tasks
-        Task::Set dependentTasks = task->getDependents();
-        delete task;
-        // Check which tasks are ready to pass to taskQueue (no dependencies)
-        for (Task::Set::iterator it = dependentTasks.begin();
-            it != dependentTasks.end(); ++it)
-        {
-            if ((*it)->isLocked())
-                continue ;
-            if (lockedTasks.erase(*it) == 0)
-                std::cerr << "Error: task not found in lockedTasks" << std::endl;
-            taskQueue.push(*it);
-        }
+        wm->_finish_task(task);
     }
     return NULL;
 }
@@ -112,7 +99,7 @@ void WorkManager::start()
     _working = true;
 }
 
-void WorkManager::push_task(Task* task)
+void WorkManager::push_task(Task *task)
 {
     if (!_accepting_work)
     {
@@ -125,4 +112,26 @@ void WorkManager::push_task(Task* task)
         return ;
     }
     _lockedTasks.insert(task);
+}
+
+void WorkManager::_finish_task(Task *task)
+{
+    if (task == NULL)
+    {
+        std::cerr << "WorkManager::_finish_task() called with NULL task" << std::endl;
+        return ;
+    }
+    // Get dependent tasks
+    Task::Set dependentTasks = task->getDependents();
+    delete task;
+    // Check which tasks are ready to pass to taskQueue (no dependencies)
+    for (Task::Set::iterator it = dependentTasks.begin();
+        it != dependentTasks.end(); ++it)
+    {
+        if ((*it)->isLocked())
+            continue ;
+        if (_lockedTasks.erase(*it) == 0)
+            std::cerr << "Error: task not found in lockedTasks" << std::endl;
+        _taskQueue.push(*it);
+    }
 }
