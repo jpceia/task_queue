@@ -14,6 +14,7 @@
 #include "WorkManager.hpp"
 #include <iostream>
 #include <unistd.h>
+#include <cstdio>
 
 
 class MyTask : public Task
@@ -26,7 +27,7 @@ public:
     {
         sleep(1);
         LockGuard lock(_mutex);
-        std::cout << "MyTask " << _id << " is running" << std::endl;
+        printf("Task %d is running\n", _id);
     }
 
 private:
