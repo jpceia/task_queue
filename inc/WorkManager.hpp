@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 21:11:47 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 21:15:04 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ private:
     TaskQueue _taskQueue;
     std::vector<pthread_t> _workers;
     bool _working;
+    bool _accepting_work;
 };
 
 #endif

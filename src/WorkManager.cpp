@@ -19,10 +19,11 @@ void* WorkManager::WorkerThread(void *ptr)
 {
     WorkManager* wm = (WorkManager *)ptr;
     TaskQueue& taskQueue = wm->_taskQueue;
+    bool& wait = wm->_accepting_work;
 
     while (true)
     {
-        Task *task = taskQueue.pop();
+        Task *task = taskQueue.pop(wait);
         if (!task)
             break ;
         try 
@@ -40,13 +41,15 @@ void* WorkManager::WorkerThread(void *ptr)
 
 WorkManager::WorkManager(int numWorkers) :
     _workers(numWorkers),
-    _working(false)
+    _working(false),
+    _accepting_work(true)
 {
 }
 
 WorkManager::WorkManager(WorkManager const &rhs) :
     _workers(rhs._workers),
-    _working(rhs._working)
+    _working(rhs._working),
+    _accepting_work(rhs._accepting_work)
 {
     *this = rhs;
 }
@@ -66,6 +69,7 @@ void WorkManager::wait()
 {
     if (!_working)
         return ;
+    _accepting_work = false;
     for (std::vector<pthread_t>::const_iterator it = _workers.begin();
         it != _workers.end(); ++it)
         pthread_join(*it, NULL);
@@ -84,10 +88,5 @@ void WorkManager::start()
 
 void WorkManager::push_task(Task* task)
 {
-    if (task == NULL)
-    {
-        _taskQueue.setAccepting(false);
-        return ;
-    }
     _taskQueue.push(task);
 }

@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 21:10:08 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 21:21:31 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #include "LockGuard.hpp"
 #include <pthread.h>
 
-TaskQueue::TaskQueue() :
-    _accepting(true)
+TaskQueue::TaskQueue()
 {
 }
 
@@ -37,7 +36,7 @@ TaskQueue& TaskQueue::operator=(TaskQueue const &rhs)
 
 void TaskQueue::push(Task *task)
 {
-    if (task == NULL || !_accepting)
+    if (task == NULL)
         return ;
     else
     {
@@ -47,24 +46,14 @@ void TaskQueue::push(Task *task)
     _cond.signal();
 }
 
-Task* TaskQueue::pop()
+Task* TaskQueue::pop(bool wait)
 {
     LockGuard lock(_mutex);
-    while (_queue.empty() && _accepting)
+    while (_queue.empty() && wait)
         _cond.wait();
     if (_queue.empty())
         return NULL;
     Task *task = _queue.front();
     _queue.pop();
     return task;
-}
-
-bool TaskQueue::isAccepting() const
-{
-    return _accepting;
-}
-
-void TaskQueue::setAccepting(bool accepting)
-{
-    _accepting = accepting;
 }
