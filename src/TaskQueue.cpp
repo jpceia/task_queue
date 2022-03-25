@@ -69,16 +69,3 @@ bool TaskQueue::isStopped()
 {
     return _stopped;
 }
-
-void TaskQueue::reset()
-{
-    // Delete all pending tasks
-    while (!_queue.empty())
-    {
-        Task* task = _queue.front();
-        if (task != NULL)
-            delete task;
-        _queue.pop();
-    }
-    _stopped = false;
-}

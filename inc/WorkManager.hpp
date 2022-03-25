@@ -29,8 +29,7 @@ public:
     void init();
     void wait();
     void push_task(Task* task);
-    void reset();
-    
+
 private:
     // Non-copyable
     WorkManager(WorkManager const &rhs);

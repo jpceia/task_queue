@@ -86,8 +86,3 @@ void WorkManager::push_task(Task* task)
 {
     _taskQueue.push(task);
 }
-
-void WorkManager::reset()
-{
-    _taskQueue.reset();
-}

@@ -29,7 +29,6 @@ public:
     void push(Task *task);
     Task *pop();
     bool isStopped();
-    void reset();
 
 private:
     // Non-copyable
