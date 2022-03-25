@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 20:49:51 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 23:34:13 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,17 @@ Task::~Task()
 {
     for (Set::const_iterator it = _dependents.begin();
         it != _dependents.end(); ++it)
-        (*it)->_remove_dependency(this);
+    {
+        Task *task = *it;
+        LockGuard lock(task->_mutex);
+        task->_dependencies.erase(this);
+    }
 }
 
 void Task::add_dependency(Task *task)
 {
     _dependencies.insert(task);
-    task->_add_dependent(this);
-}
-
-void Task::_add_dependent(Task *task)
-{
-    LockGuard(task->_mutex);
-    task->_dependents.insert(task);
+    task->_dependents.insert(this);
 }
 
 bool Task::isLocked() const
@@ -42,8 +40,7 @@ bool Task::isLocked() const
     return !_dependencies.empty();
 }
 
-void Task::_remove_dependency(Task *task)
+Task::Set Task::getDependents() const
 {
-    if (!_dependencies.erase(task))
-        std::cerr << "Task::_remove_dependency: task not found" << std::endl;
+    return _dependents;
 }

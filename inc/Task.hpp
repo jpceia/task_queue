@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 20:38:30 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 23:24:35 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ public:
     Set getDependents() const;
 
 private:
-    void _add_dependent(Task *task);
-    void _remove_dependency(Task* task);
-
     // Private attributes
     Set _dependencies;
     Set _dependents;
