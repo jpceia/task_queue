@@ -34,14 +34,19 @@ TaskSet& TaskSet::operator=(const TaskSet& rhs)
     return *this;
 }
 
-std::vector<Task*> TaskSet::getUnlockedTasks()
+std::vector<Task*> TaskSet::moveUnlockedTasks()
 {
     std::vector<Task *> tasks;
-    for (Task::Set::iterator it = _set.begin(); it != _set.end(); ++it)
+    Task::Set::iterator it = _set.begin();
+    while (it != _set.end())
     {
         if ((*it)->isLocked())
-            continue ;
-        tasks.push_back(*it);
+            ++it;
+        else
+        {
+            tasks.push_back(*it);
+            _set.erase(it++);
+        }
     }
     return tasks;
 }

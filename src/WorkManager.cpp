@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 23:53:10 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 23:57:36 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void WorkManager::start()
         return ;
     }
     // Check which tasks are ready to pass to taskQueue (no dependencies)
-    std::vector<Task *> readyTasks = _lockedTasks.getUnlockedTasks();
+    std::vector<Task *> readyTasks = _lockedTasks.moveUnlockedTasks();
     for (std::vector<Task *>::const_iterator it = readyTasks.begin();
         it != readyTasks.end(); ++it)
         _taskQueue.push(*it);
