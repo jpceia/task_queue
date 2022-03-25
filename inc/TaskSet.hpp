@@ -27,7 +27,7 @@ public:
     virtual ~TaskSet();
     TaskSet& operator=(const TaskSet& rhs);
 
-    void erase(Task *task);
+    size_t erase(Task *task);
     bool insert(Task *task);
     bool empty() const;
     void clear();
