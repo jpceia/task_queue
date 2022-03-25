@@ -46,6 +46,11 @@ bool TaskSet::insert(Task *task)
     return _set.insert(task).second;
 }
 
+bool TaskSet::empty() const
+{
+    return _set.empty();
+}
+
 void TaskSet::clear()
 {
     for (Task::Set::const_iterator it = _set.begin(); it != _set.end(); ++it)

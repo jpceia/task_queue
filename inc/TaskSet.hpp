@@ -29,6 +29,7 @@ public:
 
     void erase(Task *task);
     bool insert(Task *task);
+    bool empty() const;
     void clear();
 
 private:
