@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 20:50:40 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 21:36:18 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ public:
     TaskSet& operator=(const TaskSet& rhs);
 
     void erase(Task *task);
+    bool insert(Task *task);
     void clear();
 
 private:

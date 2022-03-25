@@ -34,10 +34,16 @@ TaskSet& TaskSet::operator=(const TaskSet& rhs)
     return *this;
 }
 
-void TaskSet::erase(Task* task)
+void TaskSet::erase(Task *task)
 {
     LockGuard lock(_mutex);
     _set.erase(task);
+}
+
+bool TaskSet::insert(Task *task)
+{
+    LockGuard lock(_mutex);
+    return _set.insert(task).second;
 }
 
 void TaskSet::clear()
