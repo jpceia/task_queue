@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TaskPool.hpp                                       :+:      :+:    :+:   */
+/*   TaskSet.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/24 18:54:46 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 20:50:40 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TASKPOOL_HPP
-# define TASKPOOL_HPP
+#ifndef TASKSET_HPP
+# define TASKSET_HPP
 
 # include "Task.hpp"
 # include "Mutex.hpp"
@@ -19,16 +19,16 @@
 # include <set>
 
 
-class TaskPool
+class TaskSet
 {
 public:
-    TaskPool(Task::Set task_set = Task::Set());
-    TaskPool(const TaskPool& rhs);
-    virtual ~TaskPool();
-    TaskPool& operator=(const TaskPool& rhs);
+    TaskSet(Task::Set task_set = Task::Set());
+    TaskSet(const TaskSet& rhs);
+    virtual ~TaskSet();
+    TaskSet& operator=(const TaskSet& rhs);
 
     void erase(Task *task);
-    void reset();
+    void clear();
 
 private:
     Mutex _mutex;
