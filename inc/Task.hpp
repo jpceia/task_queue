@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/24 18:40:25 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 20:38:30 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ public:
     virtual void run() = 0;
 
     void add_dependency(Task *task);
-    bool has_dependencies() const;
+    bool isLocked() const;
     Set getDependents() const;
 
 private:

@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/24 18:40:39 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 20:38:37 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void Task::_add_dependent(Task *task)
     task->_dependents.insert(task);
 }
 
-bool Task::has_dependencies() const
+bool Task::isLocked() const
 {
     return !_dependencies.empty();
 }
