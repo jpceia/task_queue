@@ -6,19 +6,20 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 21:15:04 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 21:39:16 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WORKMANAGER_HPP
 # define WORKMANAGER_HPP
 
-#include "Mutex.hpp"
-#include "LockGuard.hpp"
-#include "ConditionVariable.hpp"
-#include "Task.hpp"
-#include "TaskQueue.hpp"
-#include <vector>
+# include "Mutex.hpp"
+# include "LockGuard.hpp"
+# include "ConditionVariable.hpp"
+# include "Task.hpp"
+# include "TaskSet.hpp"
+# include "TaskQueue.hpp"
+# include <vector>
 
 class WorkManager
 {
@@ -40,6 +41,7 @@ private:
     
     // Private attributes
     TaskQueue _taskQueue;
+    TaskSet _lockedTasks;
     std::vector<pthread_t> _workers;
     bool _working;
     bool _accepting_work;
