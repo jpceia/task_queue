@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/24 15:16:52 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 21:07:12 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ public:
 
     void push(Task *task);
     Task *pop();
-    bool isStopped();
+    void setAccepting(bool accepting = false);
+    bool isAccepting() const;
 
 private:
     // Non-copyable
@@ -39,7 +40,7 @@ private:
     std::queue<Task *> _queue;
     ConditionVariable _cond;
     Mutex _mutex;
-    bool _stopped;
+    bool _accepting;
 };
 
 #endif

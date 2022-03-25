@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/24 15:35:35 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 21:10:08 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <pthread.h>
 
 TaskQueue::TaskQueue() :
-    _stopped(false)
+    _accepting(true)
 {
 }
 
@@ -37,14 +37,8 @@ TaskQueue& TaskQueue::operator=(TaskQueue const &rhs)
 
 void TaskQueue::push(Task *task)
 {
-    if (_stopped)
-        return;
-    if (task == NULL)
-    {
-        _stopped = true;
-        _cond.broadcast();
-        return;
-    }
+    if (task == NULL || !_accepting)
+        return ;
     else
     {
         LockGuard lock(_mutex);
@@ -56,7 +50,7 @@ void TaskQueue::push(Task *task)
 Task* TaskQueue::pop()
 {
     LockGuard lock(_mutex);
-    while (_queue.empty() && !_stopped)
+    while (_queue.empty() && _accepting)
         _cond.wait();
     if (_queue.empty())
         return NULL;
@@ -65,7 +59,12 @@ Task* TaskQueue::pop()
     return task;
 }
 
-bool TaskQueue::isStopped()
+bool TaskQueue::isAccepting() const
 {
-    return _stopped;
+    return _accepting;
+}
+
+void TaskQueue::setAccepting(bool accepting)
+{
+    _accepting = accepting;
 }

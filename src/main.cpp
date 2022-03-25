@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:14:16 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/11 15:27:42 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 21:04:57 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ int main()
     for (size_t i = 0; i < 50; ++i)
         manager.push_task(new MyTask(i, mutex));
     manager.push_task(NULL);
-    manager.init();
+    manager.start();
     return 0;
 }

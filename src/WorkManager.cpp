@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/24 15:38:58 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 21:11:10 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void* WorkManager::WorkerThread(void *ptr)
 
 WorkManager::WorkManager(int numWorkers) :
     _workers(numWorkers),
-    _running(false)
+    _working(false)
 {
 }
 
 WorkManager::WorkManager(WorkManager const &rhs) :
     _workers(rhs._workers),
-    _running(rhs._running)
+    _working(rhs._working)
 {
     *this = rhs;
 }
@@ -64,25 +64,30 @@ WorkManager& WorkManager::operator=(WorkManager const &rhs)
 
 void WorkManager::wait()
 {
-    if (!_running)
+    if (!_working)
         return ;
     for (std::vector<pthread_t>::const_iterator it = _workers.begin();
         it != _workers.end(); ++it)
         pthread_join(*it, NULL);
-    _running = false;
+    _working = false;
 }
 
-void WorkManager::init()
+void WorkManager::start()
 {
-    if (_running)
+    if (_working) // already working
         return ;
     for (std::vector<pthread_t>::iterator it = _workers.begin();
         it != _workers.end(); ++it)
         pthread_create(&*it, NULL, WorkerThread, (void*)this);
-    _running = true;
+    _working = true;
 }
 
 void WorkManager::push_task(Task* task)
 {
+    if (task == NULL)
+    {
+        _taskQueue.setAccepting(false);
+        return ;
+    }
     _taskQueue.push(task);
 }
