@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 20:14:21 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 20:39:12 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ private:
     
     // Private attributes
     TaskQueue _taskQueue;
-    TaskPool _taskPool;
     std::vector<pthread_t> _workers;
     bool _running;
 };
