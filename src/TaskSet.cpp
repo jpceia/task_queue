@@ -25,6 +25,8 @@ TaskSet::TaskSet(const TaskSet& rhs) :
 
 TaskSet::~TaskSet()
 {
+    while (!_set.empty())
+        delete *_set.begin();
 }
 
 TaskSet& TaskSet::operator=(const TaskSet& rhs)
