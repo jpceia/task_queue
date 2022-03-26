@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 05:17:52 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 08:06:26 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 unsigned int Task::_taskCount = 0;
 
 Task::Task() :
+    _locked(false),
     _id(_taskCount++)
 {
 }
