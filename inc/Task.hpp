@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 04:10:24 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 04:16:10 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define TASK_HPP
 
 # include <set>
+# include <vector>
 # include <pthread.h>
 # include "Mutex.hpp"
 
-class WorkManager;
 
 class Task
 {

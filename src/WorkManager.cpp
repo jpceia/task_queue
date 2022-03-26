@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 03:30:44 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 04:11:57 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ void WorkManager::start()
         return ;
     }
     // Check which tasks are ready to pass to taskQueue (no dependencies)
-    _taskQueue.push(_lockedTasks.moveUnlockedTasks());
+    std::vector<Task *> readyTasks = _lockedTasks.moveUnlockedTasks();
+    Task::lock(readyTasks);
+    _taskQueue.push(readyTasks);
     
     // Start workers
     for (std::vector<pthread_t>::iterator it = _workers.begin();
@@ -107,7 +109,15 @@ void WorkManager::pushTask(Task *task)
         std::cerr << "WorkManager::push_task() called with NULL task" << std::endl;
         return ;
     }
-    _lockedTasks.insert(task);
+    if (_working && task->isReady())
+    {
+        task->lock();
+        _taskQueue.push(task);
+    }
+    else
+    {
+        _lockedTasks.insert(task);
+    }
 }
 
 void WorkManager::pushTask(const std::vector<Task *>& tasks)
@@ -125,7 +135,7 @@ void WorkManager::pushTask(const std::vector<Task *>& tasks)
             std::cerr << "WorkManager::push_task() called with NULL task" << std::endl;
             return ;
         }
-        _lockedTasks.insert(*it);
+        this->pushTask(*it);
     }
 }
 
