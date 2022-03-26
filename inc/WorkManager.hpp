@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 23:45:18 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 00:13:08 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,23 @@ private:
     // thread functions
     static void *WorkerThread(void *ptr);
 
+    // Helper function to delete an task and remove its dependents dependencies
     void _finish_task(Task *task);
     
     // Private attributes
+    // Queue with tasks ready to be executed
     TaskQueue _taskQueue;
+
+    // Set with tasks that can be executed at the moment
     TaskSet _lockedTasks;
+
+    // vector of threads (workers)
     std::vector<pthread_t> _workers;
+
+    // Boolean to indicate if the workers are running
     bool _working;
+
+    // Boolean to indicate if the manager is waiting for tasks
     bool _accepting_work;
 };
 
