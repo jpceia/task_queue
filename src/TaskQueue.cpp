@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 03:25:34 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 06:19:13 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ Task* TaskQueue::pop(bool& wait)
 {
     LockGuard lock(_popMtx);
     while (_queue.empty() && wait)
-        _cv.wait();
+        _cv.wait(_popMtx);
     if (_queue.empty())
         return NULL;
     Task *task = _queue.front();
