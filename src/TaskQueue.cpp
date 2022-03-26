@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 01:12:42 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 01:28:19 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void TaskQueue::push(Task *task)
         return ;
     else
     {
-        // LockGuard lock(_mutex);
+        LockGuard lock(_push_mtx);
         #ifdef DEBUG
         std::cout << "Task " << task->getId() << " is pushed to taskQueue" << std::endl;
         #endif
         _queue.push(task);
     }
-    _cond.signal();
+    _cv.signal();
 }
 
 void TaskQueue::push(const std::vector<Task *>& tasks)
@@ -62,7 +62,7 @@ void TaskQueue::push(const std::vector<Task *>& tasks)
         return ;
     else
     {
-        LockGuard lock(_mutex);
+        LockGuard lock(_push_mtx);
         for (std::vector<Task *>::const_iterator it = tasks.begin();
             it != tasks.end(); ++it)
         {
@@ -70,14 +70,14 @@ void TaskQueue::push(const std::vector<Task *>& tasks)
                 _queue.push(*it);
         }
     }
-    _cond.broadcast();
+    _cv.broadcast();
 }
 
 Task* TaskQueue::pop(bool wait)
 {
-    LockGuard lock(_mutex);
+    LockGuard lock(_pop_mtx);
     while (_queue.empty() && wait)
-        _cond.wait();
+        _cv.wait();
     if (_queue.empty())
         return NULL;
     Task *task = _queue.front();

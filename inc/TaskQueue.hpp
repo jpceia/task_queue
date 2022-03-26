@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 00:13:15 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 01:28:09 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ private:
 
     // Private attributes
     std::queue<Task *> _queue;
-    ConditionVariable _cond;
-    Mutex _mutex;
+    ConditionVariable _cv;
+    Mutex _push_mtx;
+    Mutex _pop_mtx;
 };
 
 #endif
