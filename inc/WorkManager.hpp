@@ -30,6 +30,7 @@ public:
     void start();
     void wait();
     void push_task(Task* task);
+    void push_task(const std::vector<Task *>& tasks);
 
 private:
     // Non-copyable

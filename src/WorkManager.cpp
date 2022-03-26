@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 00:01:02 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 00:12:46 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,25 @@ void WorkManager::push_task(Task *task)
         return ;
     }
     _lockedTasks.insert(task);
+}
+
+void WorkManager::push_task(const std::vector<Task *>& tasks)
+{
+    if (!_accepting_work)
+    {
+        std::cerr << "WorkManager::push_task() called while not accepting work" << std::endl;
+        return ;
+    }
+    for (std::vector<Task *>::const_iterator it = tasks.begin();
+        it != tasks.end(); ++it)
+    {
+        if (*it == NULL)
+        {
+            std::cerr << "WorkManager::push_task() called with NULL task" << std::endl;
+            return ;
+        }
+        _lockedTasks.insert(*it);
+    }
 }
 
 void WorkManager::_finish_task(Task *task)
