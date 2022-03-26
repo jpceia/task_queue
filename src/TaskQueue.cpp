@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 02:52:44 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 02:55:19 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,12 @@ void TaskQueue::push(const std::vector<Task *>& tasks)
         }
     }
     _cv.broadcast();
+}
+
+Task* TaskQueue::pop()
+{
+    bool wait = false;
+    return pop(wait);
 }
 
 Task* TaskQueue::pop(bool& wait)

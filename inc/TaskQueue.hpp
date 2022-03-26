@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 02:51:43 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 02:54:35 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ public:
 
     void push(Task *task);
     void push(const std::vector<Task *>& tasks);
+    Task *pop();
     Task *pop(bool& wait);
     bool empty() const;
 
