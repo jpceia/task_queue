@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 23:24:35 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 00:36:44 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,17 @@ public:
     void add_dependency(Task *task);
     bool isLocked() const;
     Set getDependents() const;
+    unsigned int getId() const;
 
 private:
     // Private attributes
     Set _dependencies;
     Set _dependents;
     Mutex _mutex; // for dependencies
+    const unsigned int _id;
+    
+    // static variable to count the number of tasks
+    static unsigned int _taskCount;
 };
 
 #endif

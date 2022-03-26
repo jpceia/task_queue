@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 23:34:13 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 00:39:48 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 #include "LockGuard.hpp"
 #include <iostream>
 
-Task::Task()
+unsigned int Task::_taskCount = 0;
+
+Task::Task() :
+    _id(_taskCount++)
 {
 }
 
@@ -43,4 +46,9 @@ bool Task::isLocked() const
 Task::Set Task::getDependents() const
 {
     return _dependents;
+}
+
+unsigned int Task::getId() const
+{
+    return _id;
 }

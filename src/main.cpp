@@ -16,27 +16,28 @@
 #include <unistd.h>
 #include <cstdio>
 
+// https://codereview.stackexchange.com/questions/201640/a-thread-safe-task-queue-implementation-using-my-own-lock-guard-in-c
+
 
 class MyTask : public Task
 {
 public:
-    MyTask(unsigned int id, Mutex& mutex) : _id(id), _mutex(mutex) {}
+    MyTask(Mutex& mutex) : _mutex(mutex) {}
     ~MyTask() {}
 
     void run()
     {
         sleep(1);
         LockGuard lock(_mutex);
-        printf("Task %d is running\n", _id);
+        printf("Task %d is running\n", this->getId());
     }
 
 private:
     // Non-copyable
-    MyTask(MyTask const &rhs) : _id(rhs._id), _mutex(rhs._mutex) { (void)rhs; };
+    MyTask(MyTask const &rhs) : _mutex(rhs._mutex) { (void)rhs; };
     MyTask &operator=(MyTask const &rhs) { (void)rhs; return *this; };
 
     // Private attributes
-    const unsigned int _id;
     Mutex& _mutex;
 };
 
