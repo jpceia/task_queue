@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 05:26:14 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 05:27:39 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void* WorkManager::WorkerThread(void *ptr)
 {
     WorkManager* wm = (WorkManager *)ptr;
     TaskQueue& taskQueue = wm->_taskQueue;
+    TaskSet& taskPool = wm->_taskPool;
     bool& wait = wm->_acceptingWork;
 
     while (true)
@@ -35,7 +36,8 @@ void* WorkManager::WorkerThread(void *ptr)
         {
             std::cerr << "Exception: " << e.what() << std::endl;
         }
-        wm->_finish_task(task);
+        task->moveDeps(taskPool, taskQueue);
+        delete task;
     }
     return NULL;
 }
@@ -137,16 +139,4 @@ void WorkManager::pushTask(const std::vector<Task *>& tasks)
         }
         this->pushTask(*it);
     }
-}
-
-void WorkManager::_finish_task(Task *task)
-{
-    if (task == NULL)
-    {
-        std::cerr << "WorkManager::_finish_task() called with NULL task" << std::endl;
-        return ;
-    }
-    // Get dependent tasks
-    task->moveDeps(_taskPool, _taskQueue);
-    delete task;
 }
