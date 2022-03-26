@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 21:26:26 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/25 23:59:22 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "ConditionVariable.hpp"
 # include <pthread.h>
 # include <queue>
-# include <utility>
+# include <vector>
 
 class TaskQueue
 {
@@ -27,6 +27,7 @@ public:
     ~TaskQueue();
 
     void push(Task *task);
+    void push(std::vector<Task *> tasks);
     Task *pop(bool wait = false);
 
 private:
