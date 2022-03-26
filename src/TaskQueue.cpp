@@ -52,8 +52,9 @@ void TaskQueue::push(Task *task)
         std::cout << "Task " << task->getId() << " is pushed to taskQueue" << std::endl;
         #endif
         _queue.push(task);
+        _cv.signal();
     }
-    _cv.signal();
+    
 }
 
 void TaskQueue::push(const std::vector<Task *>& tasks)
@@ -69,8 +70,8 @@ void TaskQueue::push(const std::vector<Task *>& tasks)
             if (*it != NULL)
                 _queue.push(*it);
         }
+        _cv.broadcast();
     }
-    _cv.broadcast();
 }
 
 Task* TaskQueue::pop()
