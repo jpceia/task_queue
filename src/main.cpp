@@ -45,21 +45,19 @@ int main()
 {
     std::cout << "Hello World!" << std::endl;
     WorkManager manager(5);
+    manager.start();
     Mutex mutex;
     MyTask *task[5];
     for (int i = 0; i < 5; i++)
-    {
         task[i] = new MyTask(mutex);
-        manager.pushTask(task[i]);
-    }
-    for (size_t i = 0; i < 50; ++i)
     task[0]->addDependency(task[1]);
     task[0]->addDependency(task[2]);
     task[1]->addDependency(task[3]);
     task[1]->addDependency(task[4]);
     task[2]->addDependency(task[3]);
     task[2]->addDependency(task[4]);
-    manager.start();
+    for (int i = 0; i < 5; i++)
+        manager.pushTask(task[i]);
     manager.wait();
     return 0;
 }
