@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 03:24:54 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 05:26:14 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ private:
     TaskQueue _taskQueue;
 
     // Set with tasks that can be executed at the moment
-    TaskSet _lockedTasks;
+    TaskSet _taskPool;
 
     // vector of threads (workers)
     std::vector<pthread_t> _workers;

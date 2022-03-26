@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 05:15:42 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 05:26:14 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void WorkManager::start()
         return ;
     }
     // Check which tasks are ready to pass to taskQueue (no dependencies)
-    std::vector<Task *> readyTasks = _lockedTasks.moveUnlockedTasks();
+    std::vector<Task *> readyTasks = _taskPool.moveUnlockedTasks();
     Task::lock(readyTasks);
     _taskQueue.push(readyTasks);
     
@@ -116,7 +116,7 @@ void WorkManager::pushTask(Task *task)
     }
     else
     {
-        _lockedTasks.insert(task);
+        _taskPool.insert(task);
     }
 }
 
@@ -147,6 +147,6 @@ void WorkManager::_finish_task(Task *task)
         return ;
     }
     // Get dependent tasks
-    task->moveDeps(_lockedTasks, _taskQueue);
+    task->moveDeps(_taskPool, _taskQueue);
     delete task;
 }
