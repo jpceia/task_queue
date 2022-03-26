@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 04:16:10 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 05:16:17 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <pthread.h>
 # include "Mutex.hpp"
 
+
+class TaskSet;
+class TaskQueue;
 
 class Task
 {
@@ -35,8 +38,12 @@ public:
     void addDependency(Task *task);
     void lock();
     static void lock(const std::vector<Task *>& tasks);
+    void moveDeps(TaskSet& taskSet, TaskQueue& taskQueue);
 
 private:
+    // Helper methods
+    bool _moveIfReady(TaskSet& taskSet, TaskQueue& taskQueue);
+    
     // Private attributes
     Set _dependencies;
     Set _dependents;
