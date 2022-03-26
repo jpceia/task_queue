@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:14:16 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 01:45:18 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 01:52:16 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ int main()
     task[2]->add_dependency(task[3]);
     task[2]->add_dependency(task[4]);
     manager.start();
+    manager.wait();
     return 0;
 }

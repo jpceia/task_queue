@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 00:45:04 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 02:42:23 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ WorkManager& WorkManager::operator=(WorkManager const &rhs)
 void WorkManager::wait()
 {
     if (!_working)
-    {
-        std::cerr << "WorkManager::wait() called while not started" << std::endl;
         return ;
-    }
     _accepting_work = false;
     for (std::vector<pthread_t>::const_iterator it = _workers.begin();
         it != _workers.end(); ++it)
