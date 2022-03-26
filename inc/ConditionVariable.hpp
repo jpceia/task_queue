@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:17:27 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 20:47:05 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 06:19:01 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 # include <pthread.h>
 # include "Mutex.hpp"
+# include "LockGuard.hpp"
 
 class ConditionVariable
 {
 public:
     ConditionVariable() { pthread_cond_init(&_cond, NULL); }
     ~ConditionVariable() { pthread_cond_destroy(&_cond); }
-    void wait() { pthread_cond_wait(&_cond, &_mutex._mutex); }
+    void wait(Mutex &mutex) { pthread_cond_wait(&_cond, &mutex._mutex); }
     void signal() { pthread_cond_signal(&_cond); }
     void broadcast() { pthread_cond_broadcast(&_cond); }
 
@@ -32,7 +33,6 @@ private:
 
     // Private attributes
     pthread_cond_t _cond;
-    Mutex _mutex;
 };
 
 #endif
