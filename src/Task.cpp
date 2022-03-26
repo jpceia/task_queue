@@ -38,9 +38,9 @@ void Task::addDependency(Task *task)
     task->_dependents.insert(this);
 }
 
-bool Task::isLocked() const
+bool Task::isReady() const
 {
-    return !_dependencies.empty();
+    return _dependencies.empty();
 }
 
 Task::Set Task::getDependents() const

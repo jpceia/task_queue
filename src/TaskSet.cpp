@@ -42,13 +42,13 @@ std::vector<Task*> TaskSet::moveUnlockedTasks()
     Task::Set::iterator it = _set.begin();
     while (it != _set.end())
     {
-        if ((*it)->isLocked())
-            ++it;
-        else
+        if ((*it)->isReady())
         {
             tasks.push_back(*it);
             _set.erase(it++);
         }
+        else
+            ++it;
     }
     return tasks;
 }

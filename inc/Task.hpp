@@ -27,7 +27,7 @@ public:
     virtual void run() = 0;
 
     void addDependency(Task *task);
-    bool isLocked() const;
+    bool isReady() const;
     Set getDependents() const;
     unsigned int getId() const;
 

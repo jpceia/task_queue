@@ -143,19 +143,20 @@ void WorkManager::_finish_task(Task *task)
     for (Task::Set::iterator it = dependentTasks.begin();
         it != dependentTasks.end(); ++it)
     {
-        if ((*it)->isLocked())
-            continue ;
-        #ifdef DEBUG
-        std::cout << "Task " << (*it)->getId() << " is ready to pass to taskQueue" << std::endl;
-        #endif
-        if (_lockedTasks.erase(*it) == 0)
-            std::cerr << "Error: task not found in lockedTasks" << std::endl;
-        #ifdef DEBUG
-        std::cout << "Task " << (*it)->getId() << " is removed from lockedTasks" << std::endl;
-        #endif
-        _taskQueue.push(*it);
-        #ifdef DEBUG
-        std::cout << "Task " << (*it)->getId() << " passed to taskQueue" << std::endl;
-        #endif
+        if ((*it)->isReady())
+        {
+            #ifdef DEBUG
+            std::cout << "Task " << (*it)->getId() << " is ready to pass to taskQueue" << std::endl;
+            #endif
+            if (_lockedTasks.erase(*it) == 0)
+                std::cerr << "Error: task not found in lockedTasks" << std::endl;
+            #ifdef DEBUG
+            std::cout << "Task " << (*it)->getId() << " is removed from lockedTasks" << std::endl;
+            #endif
+            _taskQueue.push(*it);
+            #ifdef DEBUG
+            std::cout << "Task " << (*it)->getId() << " passed to taskQueue" << std::endl;
+            #endif
+        }
     }
 }
