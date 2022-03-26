@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 00:12:46 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 00:45:04 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "TaskQueue.hpp"
 #include "WorkManager.hpp"
 #include <iostream>
+
 
 void* WorkManager::WorkerThread(void *ptr)
 {
@@ -146,8 +147,17 @@ void WorkManager::_finish_task(Task *task)
     {
         if ((*it)->isLocked())
             continue ;
+        #ifdef DEBUG
+        std::cout << "Task " << (*it)->getId() << " is ready to pass to taskQueue" << std::endl;
+        #endif
         if (_lockedTasks.erase(*it) == 0)
             std::cerr << "Error: task not found in lockedTasks" << std::endl;
+        #ifdef DEBUG
+        std::cout << "Task " << (*it)->getId() << " is removed from lockedTasks" << std::endl;
+        #endif
         _taskQueue.push(*it);
+        #ifdef DEBUG
+        std::cout << "Task " << (*it)->getId() << " passed to taskQueue" << std::endl;
+        #endif
     }
 }

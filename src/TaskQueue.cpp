@@ -14,6 +14,7 @@
 #include "Task.hpp"
 #include "LockGuard.hpp"
 #include <pthread.h>
+#include <iostream>
 
 TaskQueue::TaskQueue()
 {
@@ -40,7 +41,9 @@ void TaskQueue::push(Task *task)
         return ;
     else
     {
-        LockGuard lock(_mutex);
+        #ifdef DEBUG
+        std::cout << "Task " << task->getId() << " is pushed to taskQueue" << std::endl;
+        #endif
         _queue.push(task);
     }
     _cond.signal();
