@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 03:25:55 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 03:30:44 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void WorkManager::wait()
         it != _workers.end(); ++it)
         pthread_join(*it, NULL);
     _working = false;
+    _acceptingWork = true;
 }
 
 void WorkManager::start()
