@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 02:42:23 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 03:25:55 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void* WorkManager::WorkerThread(void *ptr)
 {
     WorkManager* wm = (WorkManager *)ptr;
     TaskQueue& taskQueue = wm->_taskQueue;
-    bool& wait = wm->_accepting_work;
+    bool& wait = wm->_acceptingWork;
 
     while (true)
     {
@@ -43,14 +43,14 @@ void* WorkManager::WorkerThread(void *ptr)
 WorkManager::WorkManager(int numWorkers) :
     _workers(numWorkers),
     _working(false),
-    _accepting_work(true)
+    _acceptingWork(true)
 {
 }
 
 WorkManager::WorkManager(WorkManager const &rhs) :
     _workers(rhs._workers),
     _working(rhs._working),
-    _accepting_work(rhs._accepting_work)
+    _acceptingWork(rhs._acceptingWork)
 {
     *this = rhs;
 }
@@ -70,7 +70,7 @@ void WorkManager::wait()
 {
     if (!_working)
         return ;
-    _accepting_work = false;
+    _acceptingWork = false;
     for (std::vector<pthread_t>::const_iterator it = _workers.begin();
         it != _workers.end(); ++it)
         pthread_join(*it, NULL);
@@ -94,9 +94,9 @@ void WorkManager::start()
     _working = true;
 }
 
-void WorkManager::push_task(Task *task)
+void WorkManager::pushTask(Task *task)
 {
-    if (!_accepting_work)
+    if (!_acceptingWork)
     {
         std::cerr << "WorkManager::push_task() called while not accepting work" << std::endl;
         return ;
@@ -109,9 +109,9 @@ void WorkManager::push_task(Task *task)
     _lockedTasks.insert(task);
 }
 
-void WorkManager::push_task(const std::vector<Task *>& tasks)
+void WorkManager::pushTask(const std::vector<Task *>& tasks)
 {
-    if (!_accepting_work)
+    if (!_acceptingWork)
     {
         std::cerr << "WorkManager::push_task() called while not accepting work" << std::endl;
         return ;

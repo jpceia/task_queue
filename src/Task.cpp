@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 03:01:03 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 03:25:21 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ Task::~Task()
         it != _dependents.end(); ++it)
     {
         Task *task = *it;
-        LockGuard lock(task->_dep_mtx);
+        LockGuard lock(task->_depMtx);
         task->_dependencies.erase(this);
     }
 }
 
-void Task::add_dependency(Task *task)
+void Task::addDependency(Task *task)
 {
     _dependencies.insert(task);
     task->_dependents.insert(this);

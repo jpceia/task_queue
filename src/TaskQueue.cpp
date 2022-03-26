@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 02:55:19 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 03:25:34 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void TaskQueue::push(Task *task)
         return ;
     else
     {
-        LockGuard lock(_push_mtx);
+        LockGuard lock(_pushMtx);
         #ifdef DEBUG
         std::cout << "Task " << task->getId() << " is pushed to taskQueue" << std::endl;
         #endif
@@ -62,7 +62,7 @@ void TaskQueue::push(const std::vector<Task *>& tasks)
         return ;
     else
     {
-        LockGuard lock(_push_mtx);
+        LockGuard lock(_pushMtx);
         for (std::vector<Task *>::const_iterator it = tasks.begin();
             it != tasks.end(); ++it)
         {
@@ -81,7 +81,7 @@ Task* TaskQueue::pop()
 
 Task* TaskQueue::pop(bool& wait)
 {
-    LockGuard lock(_pop_mtx);
+    LockGuard lock(_popMtx);
     while (_queue.empty() && wait)
         _cv.wait();
     if (_queue.empty())

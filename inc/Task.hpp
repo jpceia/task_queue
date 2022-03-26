@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 02:58:01 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 03:25:09 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ public:
     virtual ~Task();
     virtual void run() = 0;
 
-    void add_dependency(Task *task);
+    void addDependency(Task *task);
     bool isLocked() const;
     Set getDependents() const;
     unsigned int getId() const;
@@ -35,7 +35,7 @@ private:
     // Private attributes
     Set _dependencies;
     Set _dependents;
-    Mutex _dep_mtx;
+    Mutex _depMtx;
     const unsigned int _id;
     
     // static variable to count the number of tasks

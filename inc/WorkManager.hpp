@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 00:13:08 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 03:24:54 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ public:
 
     void start();
     void wait();
-    void push_task(Task* task);
-    void push_task(const std::vector<Task *>& tasks);
+    void pushTask(Task* task);
+    void pushTask(const std::vector<Task *>& tasks);
 
 private:
     // Non-copyable
@@ -57,7 +57,7 @@ private:
     bool _working;
 
     // Boolean to indicate if the manager is waiting for tasks
-    bool _accepting_work;
+    bool _acceptingWork;
 };
 
 #endif

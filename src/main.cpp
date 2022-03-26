@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:14:16 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 01:52:16 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 03:26:16 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ int main()
     for (int i = 0; i < 5; i++)
     {
         task[i] = new MyTask(mutex);
-        manager.push_task(task[i]);
+        manager.pushTask(task[i]);
     }
     for (size_t i = 0; i < 50; ++i)
-    task[0]->add_dependency(task[1]);
-    task[0]->add_dependency(task[2]);
-    task[1]->add_dependency(task[3]);
-    task[1]->add_dependency(task[4]);
-    task[2]->add_dependency(task[3]);
-    task[2]->add_dependency(task[4]);
+    task[0]->addDependency(task[1]);
+    task[0]->addDependency(task[2]);
+    task[1]->addDependency(task[3]);
+    task[1]->addDependency(task[4]);
+    task[2]->addDependency(task[3]);
+    task[2]->addDependency(task[4]);
     manager.start();
     manager.wait();
     return 0;
