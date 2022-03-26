@@ -73,7 +73,7 @@ void TaskQueue::push(const std::vector<Task *>& tasks)
     _cv.broadcast();
 }
 
-Task* TaskQueue::pop(bool wait)
+Task* TaskQueue::pop(bool& wait)
 {
     LockGuard lock(_pop_mtx);
     while (_queue.empty() && wait)

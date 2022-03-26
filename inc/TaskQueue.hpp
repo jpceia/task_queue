@@ -28,7 +28,7 @@ public:
 
     void push(Task *task);
     void push(const std::vector<Task *>& tasks);
-    Task *pop(bool wait = false);
+    Task *pop(bool& wait);
     bool empty() const;
 
 private:
