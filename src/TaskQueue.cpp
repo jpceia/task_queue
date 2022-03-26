@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 00:01:45 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 00:13:38 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void TaskQueue::push(Task *task)
     _cond.signal();
 }
 
-void TaskQueue::push(std::vector<Task *> tasks)
+void TaskQueue::push(const std::vector<Task *>& tasks)
 {
     if (tasks.empty())
         return ;
     else
     {
         LockGuard lock(_mutex);
-        for (std::vector<Task *>::iterator it = tasks.begin();
+        for (std::vector<Task *>::const_iterator it = tasks.begin();
             it != tasks.end(); ++it)
         {
             if (*it != NULL)
