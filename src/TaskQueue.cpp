@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 00:13:38 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 01:12:42 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ TaskQueue::TaskQueue(TaskQueue const &rhs)
 
 TaskQueue::~TaskQueue()
 {
+    while (!_queue.empty())
+    {
+        Task *task = _queue.front();
+        _queue.pop();
+        delete task;
+    }
 }
 
 TaskQueue& TaskQueue::operator=(TaskQueue const &rhs)
@@ -41,6 +47,7 @@ void TaskQueue::push(Task *task)
         return ;
     else
     {
+        // LockGuard lock(_mutex);
         #ifdef DEBUG
         std::cout << "Task " << task->getId() << " is pushed to taskQueue" << std::endl;
         #endif
