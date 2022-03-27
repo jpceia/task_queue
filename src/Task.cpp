@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 08:06:26 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/26 08:10:40 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ void Task::addDependency(Task *task)
             << std::endl;
         return ;
     }
-    _dependencies.insert(task);
-    task->_dependents.insert(this);
+    if (_dependencies.insert(task).second)
+        task->_dependents.insert(this);
+    else
+        std::cerr << "Task::addDependency: dependency already exists" << std::endl;
 }
 
 void Task::lock()
