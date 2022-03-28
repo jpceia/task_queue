@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 08:10:40 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/27 07:58:25 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,16 @@
 #include <iostream>
 #include <vector>
 
-unsigned int Task::_taskCount = 0;
 
 Task::Task() :
-    _locked(false),
-    _id(_taskCount++)
+    _locked(false)
 {
 }
 
 Task::~Task()
 {
     if (!_dependencies.empty())
-        std::cerr << "Task " << _id << " is being deleted while still having dependencies" << std::endl;
+        std::cerr << "Task " << this->getId() << " is being deleted while still having dependencies" << std::endl;
     for (Set::const_iterator it = _dependents.begin();
         it != _dependents.end(); ++it)
     {
@@ -47,12 +45,6 @@ Task::Set Task::getDependents() const
 {
     return _dependents;
 }
-
-unsigned int Task::getId() const
-{
-    return _id;
-}
-
 
 void Task::addDependency(Task *task)
 {
@@ -98,22 +90,22 @@ bool Task::_moveIfReady(TaskSet& taskSet, TaskQueue& taskQueue)
     if (!this->isReady())
         return false;
     #ifdef DEBUG
-    std::cout << "Task " << _id << " is ready to pass to taskQueue" << std::endl;
+    std::cout << "Task " << this->getId() << " is ready to pass to taskQueue" << std::endl;
     #endif
     if (!taskSet.erase(this))
     {
         #ifdef DEBUG
-        std::cerr << "/!\\ Task" << _id << " not found in taskSet"
+        std::cerr << "/!\\ Task" << this->getId() << " not found in taskSet"
             << std::endl;
         #endif
         return false;
     }
     #ifdef DEBUG
-    std::cout << "Task " << _id << " is removed from taskSet" << std::endl;
+    std::cout << "Task " << this->getId() << " is removed from taskSet" << std::endl;
     #endif
     taskQueue.push(this);
     #ifdef DEBUG
-    std::cout << "Task " << _id << " passed to taskQueue" << std::endl;
+    std::cout << "Task " << this->getId() << " passed to taskQueue" << std::endl;
     #endif
     return true;
 }

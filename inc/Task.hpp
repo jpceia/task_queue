@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 05:16:17 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/28 04:20:42 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,21 @@
 # include <vector>
 # include <pthread.h>
 # include "Mutex.hpp"
-
+# include "BaseTask.hpp"
 
 class TaskSet;
 class TaskQueue;
 
-class Task
+class Task : public BaseTask
 {
 public:
     typedef std::set<Task *> Set;
     Task();
     virtual ~Task();
-    virtual void run() = 0;
 
     bool isReady() const;
     bool isLocked() const;
     Set getDependents() const;
-    unsigned int getId() const;
 
     void addDependency(Task *task);
     void lock();
@@ -48,11 +46,7 @@ private:
     Set _dependencies;
     Set _dependents;
     Mutex _depMtx;
-    const unsigned int _id;
     bool _locked;
-    
-    // static variable to count the number of tasks
-    static unsigned int _taskCount;
 };
 
 #endif
