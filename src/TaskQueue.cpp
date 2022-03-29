@@ -12,6 +12,7 @@
 
 #include "TaskQueue.hpp"
 #include "Task.hpp"
+#include "Atomic.hpp"
 #include "LockGuard.hpp"
 #include <pthread.h>
 #include <iostream>
@@ -80,10 +81,10 @@ Task* TaskQueue::pop()
     return pop(wait);
 }
 
-Task* TaskQueue::pop(bool& wait)
+Task* TaskQueue::pop(const Atomic<bool>& wait)
 {
     LockGuard lock(_popMtx);
-    while (_queue.empty() && wait)
+    while (_queue.empty() && wait.get())
         _cv.wait(_popMtx);
     if (_queue.empty())
         return NULL;

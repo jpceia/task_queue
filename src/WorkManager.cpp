@@ -6,12 +6,13 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 05:27:39 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/29 04:50:47 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Task.hpp"
 #include "TaskQueue.hpp"
+#include "Atomic.hpp"
 #include "WorkManager.hpp"
 #include <iostream>
 
@@ -21,7 +22,7 @@ void* WorkManager::WorkerThread(void *ptr)
     WorkManager* wm = (WorkManager *)ptr;
     TaskQueue& taskQueue = wm->_taskQueue;
     TaskSet& taskPool = wm->_taskPool;
-    bool& wait = wm->_acceptingWork;
+    const Atomic<bool>& wait = wm->_acceptingWork;
 
     while (true)
     {
@@ -101,7 +102,7 @@ void WorkManager::start()
 
 void WorkManager::pushTask(Task *task)
 {
-    if (!_acceptingWork)
+    if (!_acceptingWork.get())
     {
         std::cerr << "WorkManager::push_task() called while not accepting work" << std::endl;
         return ;
@@ -124,7 +125,7 @@ void WorkManager::pushTask(Task *task)
 
 void WorkManager::pushTask(const std::vector<Task *>& tasks)
 {
-    if (!_acceptingWork)
+    if (!_acceptingWork.get())
     {
         std::cerr << "WorkManager::push_task() called while not accepting work" << std::endl;
         return ;

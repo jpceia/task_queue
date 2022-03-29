@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 05:26:36 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/29 04:15:15 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define WORKMANAGER_HPP
 
 # include "Mutex.hpp"
+# include "Atomic.hpp"
 # include "LockGuard.hpp"
 # include "ConditionVariable.hpp"
 # include "Task.hpp"
@@ -57,7 +58,7 @@ private:
     bool _working;
 
     // Boolean to indicate if the manager is waiting for tasks
-    bool _acceptingWork;
+    Atomic<bool> _acceptingWork;
 };
 
 #endif

@@ -13,6 +13,7 @@
 #ifndef TASKQUEUE_HPP
 # define TASKQUEUE_HPP
 
+# include "Atomic.hpp"
 # include "Task.hpp"
 # include "Mutex.hpp"
 # include "ConditionVariable.hpp"
@@ -29,7 +30,7 @@ public:
     void push(Task *task);
     void push(const std::vector<Task *>& tasks);
     Task *pop();
-    Task *pop(bool& wait);
+    Task *pop(const Atomic<bool>& wait);
     bool empty() const;
 
 private:
