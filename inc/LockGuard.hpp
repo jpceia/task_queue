@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 22:26:39 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/11 01:03:47 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/03/29 04:22:57 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ public:
 
 private:
     // Non-copyable
-    LockGuard(LockGuard const &rhs) : _mutex(rhs._mutex) {};
-    LockGuard &operator=(LockGuard const &rhs) { (void)rhs; return *this; }
+    LockGuard(const LockGuard &rhs) : _mutex(rhs._mutex) {};
+    LockGuard &operator=(const LockGuard &rhs) { (void)rhs; return *this; }
 
     // Private attributes
     Mutex& _mutex;
