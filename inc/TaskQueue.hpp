@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 02:24:27 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 03:31:46 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define TASKQUEUE_HPP
 
 # include "Atomic.hpp"
-# include "Task.hpp"
 # include "Mutex.hpp"
 # include "ConditionVariable.hpp"
-# include <pthread.h>
 # include <queue>
 # include <vector>
+
+class Task;
 
 class TaskQueue
 {
