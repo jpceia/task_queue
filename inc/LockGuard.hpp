@@ -6,15 +6,15 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 22:26:39 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/29 04:22:57 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 02:50:40 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LOCKGUARD_HPP
 # define LOCKGUARD_HPP
 
-#include <pthread.h>
-#include "Mutex.hpp"
+# include <pthread.h>
+# include "Mutex.hpp"
 
 class LockGuard
 {

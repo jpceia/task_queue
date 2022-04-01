@@ -6,18 +6,18 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 02:29:45 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 03:09:36 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TASKSET_HPP
 # define TASKSET_HPP
 
-# include "Task.hpp"
 # include "Mutex.hpp"
-# include "LockGuard.hpp"
 # include <set>
 # include <vector>
+
+class Task;
 
 class TaskSet
 {
