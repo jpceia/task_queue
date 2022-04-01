@@ -38,7 +38,7 @@ TaskSet& TaskSet::operator=(const TaskSet& rhs)
 std::vector<Task*> TaskSet::moveUnlockedTasks()
 {
     std::vector<Task *> tasks;
-    Task::Set::iterator it = _set.begin();
+    std::set<Task *>::iterator it = _set.begin();
     while (it != _set.end())
     {
         if ((*it)->isReady())

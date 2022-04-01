@@ -48,8 +48,8 @@ public:
     void clear();
 
 private:
-    Mutex _mutex;
-    Task::Set _set;
+    mutable Mutex _mutex;
+    std::set<Task *> _set;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/27 07:58:25 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 03:08:53 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ Task::~Task()
 {
     if (!_dependencies.empty())
         std::cerr << "Task " << this->getId() << " is being deleted while still having dependencies" << std::endl;
-    for (Set::const_iterator it = _dependents.begin();
+    for (TaskSet::const_iterator it = _dependents.begin();
         it != _dependents.end(); ++it)
     {
         Task *task = *it;
-        LockGuard lock(task->_depMtx);
         task->_dependencies.erase(this);
     }
 }
@@ -41,7 +40,7 @@ bool Task::isReady() const
     return _dependencies.empty();
 }
 
-Task::Set Task::getDependents() const
+TaskSet Task::getDependents() const
 {
     return _dependents;
 }
@@ -54,7 +53,7 @@ void Task::addDependency(Task *task)
             << std::endl;
         return ;
     }
-    if (_dependencies.insert(task).second)
+    if (_dependencies.insert(task))
         task->_dependents.insert(this);
     else
         std::cerr << "Task::addDependency: dependency already exists" << std::endl;
@@ -74,11 +73,10 @@ void Task::lock(const std::vector<Task *>& tasks)
 
 void Task::moveDeps(TaskSet& taskSet, TaskQueue& taskQueue)
 {
-    for (Set::const_iterator it = _dependents.begin();
+    for (TaskSet::const_iterator it = _dependents.begin();
         it != _dependents.end(); ++it)
     {
         Task *task = *it;
-        LockGuard lock(task->_depMtx);
         task->_dependencies.erase(this);
         task->_moveIfReady(taskSet, taskQueue);
     }
