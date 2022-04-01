@@ -43,6 +43,7 @@ private:
     ConditionVariable _cv;
     Mutex _pushMtx;
     Mutex _popMtx;
+    mutable Mutex _emptyMtx;
 };
 
 #endif

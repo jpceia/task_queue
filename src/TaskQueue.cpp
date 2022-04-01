@@ -28,7 +28,7 @@ TaskQueue::TaskQueue(TaskQueue const &rhs)
 
 TaskQueue::~TaskQueue()
 {
-    while (!_queue.empty())
+    while (!this->empty())
     {
         Task *task = _queue.front();
         _queue.pop();
@@ -84,9 +84,9 @@ Task* TaskQueue::pop()
 Task* TaskQueue::pop(const Atomic<bool>& wait)
 {
     LockGuard lock(_popMtx);
-    while (_queue.empty() && wait)
+    while (this->empty() && wait)
         _cv.wait(_popMtx);
-    if (_queue.empty())
+    if (this->empty())
         return NULL;
     Task *task = _queue.front();
     _queue.pop();
@@ -95,5 +95,6 @@ Task* TaskQueue::pop(const Atomic<bool>& wait)
 
 bool TaskQueue::empty() const
 {
+    LockGuard lock(_emptyMtx);
     return _queue.empty();
 }
