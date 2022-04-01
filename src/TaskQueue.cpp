@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 03:30:30 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 06:45:42 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ bool TaskQueue::empty() const
 
 void TaskQueue::clear()
 {
-    while (!this->empty())
-        delete this->pop();
+    while (true)
+    {
+        Task *task = this->pop();
+        if (task == NULL)
+            break ;
+        delete task;
+    }
 }
