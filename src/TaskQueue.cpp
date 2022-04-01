@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 02:19:18 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 02:25:03 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ Task* TaskQueue::pop(const Atomic<bool>& wait)
 
 bool TaskQueue::empty() const
 {
-    LockGuard lock(_emptyMtx);
+    LockGuard lock(_pushMtx);
     return _queue.empty();
 }
