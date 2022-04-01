@@ -22,10 +22,24 @@ class Task;
 class TaskSet
 {
 public:
+    typedef std::set<Task *>::iterator                  iterator;
+    typedef std::set<Task *>::const_iterator            const_iterator;
+    typedef std::set<Task *>::reverse_iterator          reverse_iterator;
+    typedef std::set<Task *>::const_reverse_iterator    const_reverse_iterator;
+
     TaskSet();
     TaskSet(const TaskSet& rhs);
     virtual ~TaskSet();
     TaskSet& operator=(const TaskSet& rhs);
+
+    iterator begin() { return _set.begin(); };
+    iterator end() { return _set.end(); };
+    const_iterator begin() const { return _set.begin(); };
+    const_iterator end() const { return _set.end(); };
+    reverse_iterator rbegin() { return _set.rbegin(); };
+    reverse_iterator rend() { return _set.rend(); };
+    const_reverse_iterator rbegin() const { return _set.rbegin(); };
+    const_reverse_iterator rend() const { return _set.rend(); };
 
     std::vector<Task*> moveUnlockedTasks();
     size_t erase(Task *task);
