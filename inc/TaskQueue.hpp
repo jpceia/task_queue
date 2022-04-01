@@ -32,6 +32,7 @@ public:
     Task *pop();
     Task *pop(const Atomic<bool>& wait);
     bool empty() const;
+    void clear();
 
 private:
     // Non-copyable

@@ -66,6 +66,7 @@ bool TaskSet::insert(Task *task)
 
 bool TaskSet::empty() const
 {
+    LockGuard lock(_mutex);
     return _set.empty();
 }
 
