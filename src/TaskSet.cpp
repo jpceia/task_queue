@@ -13,8 +13,7 @@
 #include "TaskSet.hpp"
 #include "Task.hpp"
 
-TaskSet::TaskSet(Task::Set task_set) :
-    _set(task_set)
+TaskSet::TaskSet()
 {
 }
 

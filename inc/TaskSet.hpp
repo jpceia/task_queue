@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/25 23:54:53 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 02:29:45 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 class TaskSet
 {
 public:
-    TaskSet(Task::Set task_set = Task::Set());
+    TaskSet();
     TaskSet(const TaskSet& rhs);
     virtual ~TaskSet();
     TaskSet& operator=(const TaskSet& rhs);
