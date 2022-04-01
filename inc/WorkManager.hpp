@@ -25,7 +25,7 @@ class WorkManager
 {
 public:
     WorkManager(int numWorkers);
-    ~WorkManager();
+    virtual ~WorkManager();
 
     void start();
     void wait();
