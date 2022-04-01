@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 02:46:14 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 03:29:05 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 06:51:42 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ TaskSet& TaskSet::operator=(const TaskSet& rhs)
 
 std::vector<Task*> TaskSet::moveUnlockedTasks()
 {
+    LockGuard lock(_mutex);
     std::vector<Task *> tasks;
     std::set<Task *>::iterator it = _set.begin();
+
     while (it != _set.end())
     {
         if ((*it)->isReady())
@@ -72,6 +74,7 @@ bool TaskSet::empty() const
 
 void TaskSet::clear()
 {
+    LockGuard lock(_mutex);
     while (!_set.empty())
         delete *_set.begin();
     _set.clear();
