@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 02:25:03 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 03:30:30 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ TaskQueue::TaskQueue(TaskQueue const &rhs)
 
 TaskQueue::~TaskQueue()
 {
-    while (!this->empty())
-    {
-        Task *task = _queue.front();
-        _queue.pop();
-        delete task;
-    }
 }
 
 TaskQueue& TaskQueue::operator=(TaskQueue const &rhs)
@@ -98,4 +92,10 @@ bool TaskQueue::empty() const
 {
     LockGuard lock(_pushMtx);
     return _queue.empty();
+}
+
+void TaskQueue::clear()
+{
+    while (!this->empty())
+        delete this->pop();
 }

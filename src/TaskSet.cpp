@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 02:46:14 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 03:18:14 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 03:29:05 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ TaskSet::TaskSet(const TaskSet& rhs) :
 
 TaskSet::~TaskSet()
 {
-    while (!_set.empty())
-        delete *_set.begin();
 }
 
 TaskSet& TaskSet::operator=(const TaskSet& rhs)
@@ -73,6 +71,7 @@ bool TaskSet::empty() const
 
 void TaskSet::clear()
 {
-    for (Task::Set::const_iterator it = _set.begin(); it != _set.end(); ++it)
-        delete *it;
+    while (!_set.empty())
+        delete *_set.begin();
+    _set.clear();
 }

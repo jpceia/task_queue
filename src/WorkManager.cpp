@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 02:03:18 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/01 03:17:56 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ WorkManager::WorkManager(WorkManager const &rhs) :
 WorkManager::~WorkManager()
 {
     this->wait();
+    _taskPool.clear();
+    _taskQueue.clear();
 }
 
 WorkManager& WorkManager::operator=(WorkManager const &rhs)
