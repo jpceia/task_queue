@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 05:26:06 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 05:45:38 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "Atomic.hpp"
 # include "ConditionVariable.hpp"
 # include "Task.hpp"
-# include "TaskSet.hpp"
+# include "SafeSet.hpp"
 # include "SafeQueue.hpp"
 # include <vector>
 
@@ -51,7 +51,7 @@ private:
     SafeQueue<Task> _taskQueue;
 
     // Set with tasks that can NOT be executed at the moment
-    TaskSet _taskPool;
+    SafeSet<Task> _taskPool;
 
     // vector of threads (workers)
     std::vector<pthread_t> _workers;

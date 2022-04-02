@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 05:26:15 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 06:31:10 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void* WorkManager::WorkerThread(void *ptr)
 {
     WorkManager* wm = (WorkManager *)ptr;
     SafeQueue<Task>& taskQueue = wm->_taskQueue;
-    TaskSet& taskPool = wm->_taskPool;
+    SafeSet<Task>& taskPool = wm->_taskPool;
     const Atomic<bool>& wait = wm->_acceptingWork;
 
     while (true)
@@ -94,10 +94,8 @@ void WorkManager::start()
         return ;
     }
     // Check which tasks are ready to pass to taskQueue (no dependencies)
-    std::vector<Task *> readyTasks = _taskPool.moveUnlockedTasks();
-    for (std::vector<Task *>::iterator it = readyTasks.begin();
-        it != readyTasks.end(); ++it)
-        (*it)->lock();
+    SafeSet<Task> readyTasks = _taskPool.filter_and_remove(Task::isReady);
+    readyTasks.apply(Task::lock);
     _taskQueue.push(readyTasks.begin(), readyTasks.end());
     
     // Start workers

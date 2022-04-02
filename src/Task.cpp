@@ -6,13 +6,13 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 05:26:01 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 06:31:08 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Task.hpp"
 #include "LockGuard.hpp"
-#include "TaskSet.hpp"
+#include "SafeSet.hpp"
 #include "SafeQueue.hpp"
 #include <iostream>
 #include <vector>
@@ -30,7 +30,7 @@ Task::~Task()
 {
     if (!_dependencies.empty())
         std::cerr << "Task " << this->getId() << " is being deleted while still having dependencies" << std::endl;
-    for (TaskSet::const_iterator it = _dependents.begin();
+    for (SafeSet<Task>::const_iterator it = _dependents.begin();
         it != _dependents.end(); ++it)
     {
         Task *task = *it;
@@ -58,7 +58,7 @@ bool Task::isLocked(Task *task)
     return task->isLocked();
 }
 
-TaskSet Task::getDependents() const
+SafeSet<Task> Task::getDependents() const
 {
     return _dependents;
 }
@@ -87,9 +87,9 @@ void Task::lock(Task *task)
     task->lock();
 }
 
-void Task::moveDeps(TaskSet& taskSet, SafeQueue<Task>& taskQueue)
+void Task::moveDeps(SafeSet<Task>& taskSet, SafeQueue<Task>& taskQueue)
 {
-    for (TaskSet::const_iterator it = _dependents.begin();
+    for (SafeSet<Task>::const_iterator it = _dependents.begin();
         it != _dependents.end(); ++it)
     {
         Task *task = *it;
@@ -99,7 +99,7 @@ void Task::moveDeps(TaskSet& taskSet, SafeQueue<Task>& taskQueue)
 }
 
 // Must be locked before calling this function
-bool Task::_moveIfReady(TaskSet& taskSet, SafeQueue<Task>& taskQueue)
+bool Task::_moveIfReady(SafeSet<Task>& taskSet, SafeQueue<Task>& taskQueue)
 {
     if (!this->isReady())
         return false;
