@@ -43,6 +43,21 @@ bool Task::isReady() const
     return _dependencies.empty();
 }
 
+bool Task::isReady(Task *task)
+{
+    return task->isReady();
+}
+
+bool Task::isLocked() const
+{
+    return _locked;
+}
+
+bool Task::isLocked(Task *task)
+{
+    return task->isLocked();
+}
+
 TaskSet Task::getDependents() const
 {
     return _dependents;
@@ -67,11 +82,9 @@ void Task::lock()
     _locked = true;
 }
 
-void Task::lock(const std::vector<Task *>& tasks)
+void Task::lock(Task *task)
 {
-    for (std::vector<Task *>::const_iterator it = tasks.begin();
-        it != tasks.end(); ++it)
-        (*it)->lock();
+    task->lock();
 }
 
 void Task::moveDeps(TaskSet& taskSet, SafeQueue<Task>& taskQueue)

@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 05:25:57 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 06:28:49 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@ public:
     virtual ~Task();
 
     bool isReady() const;
+    static bool isReady(Task *task);
+
     bool isLocked() const;
+    static bool isLocked(Task *task);
+
+    void lock();
+    static void lock(Task *task);
+
     TaskSet getDependents() const;
 
     void addDependency(Task *task);
-    void lock();
-    static void lock(const std::vector<Task *>& tasks);
     void moveDeps(TaskSet& taskSet, SafeQueue<Task>& taskQueue);
 
 private:
