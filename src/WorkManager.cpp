@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 03:17:56 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 04:40:43 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include "WorkManager.hpp"
 #include <iostream>
 
+
+namespace wm
+{
 
 void* WorkManager::WorkerThread(void *ptr)
 {
@@ -143,3 +146,5 @@ void WorkManager::pushTask(const std::vector<Task *>& tasks)
         this->pushTask(*it);
     }
 }
+
+} // namespace wm

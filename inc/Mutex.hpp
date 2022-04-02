@@ -15,6 +15,9 @@
 
 # include <pthread.h>
 
+namespace wm
+{
+
 class Mutex
 {
 public:
@@ -28,10 +31,12 @@ private:
 
     // Non-copyable
     Mutex(Mutex const &rhs) : _mutex(rhs._mutex) {};
-    Mutex &operator=(Mutex const &rhs) { (void)rhs; return *this; }
+    Mutex &operator=(Mutex const &rhs) { (void)rhs; return *this; };
 
     // Private attributes
     pthread_mutex_t _mutex;
 };
+
+} // namespace wm
 
 #endif

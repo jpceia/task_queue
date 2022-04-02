@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 02:46:14 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 06:51:42 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 04:40:21 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "Task.hpp"
 #include "LockGuard.hpp"
 
+
+namespace wm
+{
 
 TaskSet::TaskSet()
 {
@@ -79,3 +82,5 @@ void TaskSet::clear()
         delete *_set.begin();
     _set.clear();
 }
+
+} // namespace wm

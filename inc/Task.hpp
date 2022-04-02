@@ -18,6 +18,9 @@
 # include "TaskQueue.hpp"
 # include "BaseTask.hpp"
 
+namespace wm
+{
+
 class Task : public BaseTask
 {
 public:
@@ -42,5 +45,7 @@ private:
     TaskSet _dependents;
     bool _locked;
 };
+
+} // namespace wm
 
 #endif

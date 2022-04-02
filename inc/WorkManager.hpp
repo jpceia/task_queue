@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 03:04:06 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 04:38:25 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include "TaskSet.hpp"
 # include "TaskQueue.hpp"
 # include <vector>
+
+namespace wm
+{
 
 class WorkManager
 {
@@ -59,5 +62,7 @@ private:
     // Boolean to indicate if the manager is waiting for tasks
     Atomic<bool> _acceptingWork;
 };
+
+} // namespace wm
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 04:07:33 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 02:04:23 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 04:35:04 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "Mutex.hpp"
 # include "LockGuard.hpp"
+
+namespace wm
+{
 
 template <typename T>
 class Atomic
@@ -53,5 +56,7 @@ private:
     T _data;
     mutable Mutex _mutex;
 };
+
+} // namespace wm
 
 #endif

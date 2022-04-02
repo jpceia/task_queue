@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:39:20 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 06:45:42 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 04:49:50 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 #include "LockGuard.hpp"
 #include <pthread.h>
 #include <iostream>
+
+
+namespace wm
+{
 
 TaskQueue::TaskQueue()
 {
@@ -104,3 +108,5 @@ void TaskQueue::clear()
         delete task;
     }
 }
+
+} // namespace wm

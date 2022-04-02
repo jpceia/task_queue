@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 03:31:46 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 04:37:43 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "ConditionVariable.hpp"
 # include <queue>
 # include <vector>
+
+namespace wm
+{
 
 class Task;
 
@@ -45,5 +48,7 @@ private:
     mutable Mutex _pushMtx;
     mutable Mutex _popMtx;
 };
+
+} // namespace wm
 
 #endif

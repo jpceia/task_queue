@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:14:16 by jpceia            #+#    #+#             */
-/*   Updated: 2022/03/26 03:26:16 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 04:41:07 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,16 @@
 
 // https://codereview.stackexchange.com/questions/201640/a-thread-safe-task-queue-implementation-using-my-own-lock-guard-in-c
 
-
-class MyTask : public Task
+class MyTask : public wm::Task
 {
 public:
-    MyTask(Mutex& mutex) : _mutex(mutex) {}
+    MyTask(wm::Mutex& mutex) : _mutex(mutex) {}
     ~MyTask() {}
 
     void run()
     {
         sleep(1);
-        LockGuard lock(_mutex);
+        wm::LockGuard lock(_mutex);
         printf("Task %d is running\n", this->getId());
     }
 
@@ -38,15 +37,15 @@ private:
     MyTask &operator=(MyTask const &rhs) { (void)rhs; return *this; };
 
     // Private attributes
-    Mutex& _mutex;
+    wm::Mutex& _mutex;
 };
 
 int main()
 {
     std::cout << "Hello World!" << std::endl;
-    WorkManager manager(5);
+    wm::WorkManager manager(5);
     manager.start();
-    Mutex mutex;
+    wm::Mutex mutex;
     MyTask *task[5];
     for (int i = 0; i < 5; i++)
         task[i] = new MyTask(mutex);

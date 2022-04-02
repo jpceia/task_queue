@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 03:08:53 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 04:50:12 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <iostream>
 #include <vector>
 
+
+namespace wm
+{
 
 Task::Task() :
     _locked(false)
@@ -107,3 +110,5 @@ bool Task::_moveIfReady(TaskSet& taskSet, TaskQueue& taskQueue)
     #endif
     return true;
 }
+
+} // namespace wm

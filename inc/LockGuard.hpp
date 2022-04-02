@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 22:26:39 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 02:50:40 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 04:36:52 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <pthread.h>
 # include "Mutex.hpp"
+
+namespace wm
+{
 
 class LockGuard
 {
@@ -30,5 +33,7 @@ private:
     // Private attributes
     Mutex& _mutex;
 };
+
+} // namespace wm
 
 #endif
