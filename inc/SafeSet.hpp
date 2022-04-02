@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 06:34:31 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 07:12:23 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,14 @@ public:
     const_reverse_iterator rbegin() const { return _set.rbegin(); };
     const_reverse_iterator rend() const { return _set.rend(); };
 
-    SafeSet filter(bool (*predicate)(T*));
-    SafeSet filter_and_remove(bool (*predicate)(T*));
-    void apply(void (*func)(T*));
+    template <typename U>
+    SafeSet filter(bool (*predicate)(U*));
+
+    template <typename U>
+    SafeSet filter_and_remove(bool (*predicate)(U*));
+
+    template <typename U>
+    void apply(void (*func)(U*));
 
     size_t erase(T *item);
     bool insert(T *item);
@@ -90,27 +95,29 @@ void SafeSet<T>::clear()
 }
 
 template <typename T>
-SafeSet<T> SafeSet<T>::filter(bool (*predicate)(T*))
+template <typename U>
+SafeSet<T> SafeSet<T>::filter(bool (*predicate)(U*))
 {
     SafeSet<T> filtered;
 
     LockGuard lock(_mutex);
     for (iterator it = _set.begin();
         it != _set.end(); ++it)
-        if (predicate(*it))
+        if (predicate(dynamic_cast<U*>(*it)))
             filtered._set.insert(*it);
     return filtered;
 }
 
 template <typename T>
-SafeSet<T> SafeSet<T>::filter_and_remove(bool (*predicate)(T*))
+template <typename U>
+SafeSet<T> SafeSet<T>::filter_and_remove(bool (*predicate)(U*))
 {
     SafeSet<T> filtered;
 
     LockGuard lock(_mutex);
     for (iterator it = _set.begin(); it != _set.end(); )
     {
-        if (predicate(*it))
+        if (predicate(dynamic_cast<U*>(*it)))
         {
             filtered._set.insert(*it);
             _set.erase(it++);
@@ -122,11 +129,12 @@ SafeSet<T> SafeSet<T>::filter_and_remove(bool (*predicate)(T*))
 }
 
 template <typename T>
-void SafeSet<T>::apply(void (*func)(T*))
+template <typename U>
+void SafeSet<T>::apply(void (*func)(U*))
 {
     LockGuard lock(_mutex);
     for (typename std::set<T*>::iterator it = _set.begin(); it != _set.end(); ++it)
-        func(*it);
+        func(dynamic_cast<U*>(*it));
 }
 
 } // namespace wm
