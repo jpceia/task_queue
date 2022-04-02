@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 05:27:38 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 05:59:30 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ public:
     virtual ~SafeQueue() {};
 
     void push(T *item);
-    void push(const std::vector<T*>& items);
+
+    template <typename InputIterator>
+    void push(InputIterator first, InputIterator last);
     T *pop();
     T *pop(const Atomic<bool>& wait);
     bool empty() const;
@@ -61,15 +63,12 @@ void SafeQueue<T>::push(T *item)
 }
 
 template <typename T>
-void SafeQueue<T>::push(const std::vector<T*>& items)
+template <typename InputIterator>
+void SafeQueue<T>::push(InputIterator first, InputIterator last)
 {
-    if (items.empty())
-        return ;
-
     LockGuard lock(_pushMtx);
 
-    for (typename std::vector<T*>::const_iterator it = items.begin();
-        it != items.end(); ++it)
+    for (InputIterator it = first; it != last; ++it)
     {
         if (*it != NULL)
             _queue.push(*it);

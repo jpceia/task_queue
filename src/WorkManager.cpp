@@ -96,7 +96,7 @@ void WorkManager::start()
     // Check which tasks are ready to pass to taskQueue (no dependencies)
     std::vector<Task *> readyTasks = _taskPool.moveUnlockedTasks();
     Task::lock(readyTasks);
-    _taskQueue.push(readyTasks);
+    _taskQueue.push(readyTasks.begin(), readyTasks.end());
     
     // Start workers
     for (std::vector<pthread_t>::iterator it = _workers.begin();
