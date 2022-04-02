@@ -6,14 +6,14 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 04:50:12 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 05:26:01 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Task.hpp"
 #include "LockGuard.hpp"
 #include "TaskSet.hpp"
-#include "TaskQueue.hpp"
+#include "SafeQueue.hpp"
 #include <iostream>
 #include <vector>
 
@@ -74,7 +74,7 @@ void Task::lock(const std::vector<Task *>& tasks)
         (*it)->lock();
 }
 
-void Task::moveDeps(TaskSet& taskSet, TaskQueue& taskQueue)
+void Task::moveDeps(TaskSet& taskSet, SafeQueue<Task>& taskQueue)
 {
     for (TaskSet::const_iterator it = _dependents.begin();
         it != _dependents.end(); ++it)
@@ -86,7 +86,7 @@ void Task::moveDeps(TaskSet& taskSet, TaskQueue& taskQueue)
 }
 
 // Must be locked before calling this function
-bool Task::_moveIfReady(TaskSet& taskSet, TaskQueue& taskQueue)
+bool Task::_moveIfReady(TaskSet& taskSet, SafeQueue<Task>& taskQueue)
 {
     if (!this->isReady())
         return false;

@@ -6,12 +6,12 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 04:40:43 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 05:26:15 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Task.hpp"
-#include "TaskQueue.hpp"
+#include "SafeQueue.hpp"
 #include "Atomic.hpp"
 #include "WorkManager.hpp"
 #include <iostream>
@@ -23,7 +23,7 @@ namespace wm
 void* WorkManager::WorkerThread(void *ptr)
 {
     WorkManager* wm = (WorkManager *)ptr;
-    TaskQueue& taskQueue = wm->_taskQueue;
+    SafeQueue<Task>& taskQueue = wm->_taskQueue;
     TaskSet& taskPool = wm->_taskPool;
     const Atomic<bool>& wait = wm->_acceptingWork;
 

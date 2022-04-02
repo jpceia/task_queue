@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 04:38:25 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 05:26:06 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "ConditionVariable.hpp"
 # include "Task.hpp"
 # include "TaskSet.hpp"
-# include "TaskQueue.hpp"
+# include "SafeQueue.hpp"
 # include <vector>
 
 namespace wm
@@ -48,7 +48,7 @@ private:
     
     // Private attributes
     // Queue with tasks ready to be executed
-    TaskQueue _taskQueue;
+    SafeQueue<Task> _taskQueue;
 
     // Set with tasks that can NOT be executed at the moment
     TaskSet _taskPool;

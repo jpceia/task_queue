@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/01 02:53:41 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/02 05:25:57 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <vector>
 # include "TaskSet.hpp"
-# include "TaskQueue.hpp"
+# include "SafeQueue.hpp"
 # include "BaseTask.hpp"
 
 namespace wm
@@ -34,11 +34,11 @@ public:
     void addDependency(Task *task);
     void lock();
     static void lock(const std::vector<Task *>& tasks);
-    void moveDeps(TaskSet& taskSet, TaskQueue& taskQueue);
+    void moveDeps(TaskSet& taskSet, SafeQueue<Task>& taskQueue);
 
 private:
     // Helper methods
-    bool _moveIfReady(TaskSet& taskSet, TaskQueue& taskQueue);
+    bool _moveIfReady(TaskSet& taskSet, SafeQueue<Task>& taskQueue);
 
     // Private attributes
     TaskSet _dependencies;
