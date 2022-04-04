@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 06:31:08 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 06:03:41 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,6 @@ Task::Task() :
 
 Task::~Task()
 {
-    if (!_dependencies.empty())
-        std::cerr << "Task " << this->getId() << " is being deleted while still having dependencies" << std::endl;
-    for (SafeSet<Task>::const_iterator it = _dependents.begin();
-        it != _dependents.end(); ++it)
-    {
-        Task *task = *it;
-        task->_dependencies.erase(this);
-    }
-}
-
-bool Task::isReady() const
-{
-    return _dependencies.empty();
-}
-
-bool Task::isReady(Task *task)
-{
-    return task->isReady();
 }
 
 bool Task::isLocked() const
@@ -56,25 +38,6 @@ bool Task::isLocked() const
 bool Task::isLocked(Task *task)
 {
     return task->isLocked();
-}
-
-SafeSet<Task> Task::getDependents() const
-{
-    return _dependents;
-}
-
-void Task::addDependency(Task *task)
-{
-    if (_locked)
-    {
-        std::cerr << "Task::addDependency: cannot add dependency to locked task"
-            << std::endl;
-        return ;
-    }
-    if (_dependencies.insert(task))
-        task->_dependents.insert(this);
-    else
-        std::cerr << "Task::addDependency: dependency already exists" << std::endl;
 }
 
 void Task::lock()
@@ -89,10 +52,10 @@ void Task::lock(Task *task)
 
 void Task::moveDeps(SafeSet<Task>& taskSet, SafeQueue<Task>& taskQueue)
 {
-    for (SafeSet<Task>::const_iterator it = _dependents.begin();
+    for (SafeSet<Node>::const_iterator it = _dependents.begin();
         it != _dependents.end(); ++it)
     {
-        Task *task = *it;
+        Task *task = dynamic_cast<Task *>(*it);
         task->_dependencies.erase(this);
         task->_moveIfReady(taskSet, taskQueue);
     }
@@ -106,6 +69,7 @@ bool Task::_moveIfReady(SafeSet<Task>& taskSet, SafeQueue<Task>& taskQueue)
     #ifdef DEBUG
     std::cout << "Task " << this->getId() << " is ready to pass to taskQueue" << std::endl;
     #endif
+    this->lock();
     if (!taskSet.erase(this))
     {
         #ifdef DEBUG
