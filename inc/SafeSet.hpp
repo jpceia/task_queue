@@ -60,6 +60,10 @@ public:
     size_t erase(T *item);
     
     bool insert(T *item);
+
+    template <typename InputIterator>
+    void insert(InputIterator first, InputIterator last);
+
     bool empty() const;
     void clear();
 
@@ -96,6 +100,14 @@ bool SafeSet<T>::insert(T *item)
 {
     LockGuard lock(_mutex);
     return _set.insert(item).second;
+}
+
+template <typename T>
+template <typename InputIterator>
+void SafeSet<T>::insert(InputIterator first, InputIterator last)
+{
+    LockGuard lock(_mutex);
+    _set.insert(first, last);
 }
 
 template <typename T>
