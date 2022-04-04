@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 05:28:16 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 06:56:04 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ public:
     template <typename U>
     void apply(void (*func)(U*));
 
+    iterator find(T *item) const;
+
     void erase(iterator position);
     size_t erase(T *item);
     
@@ -79,6 +81,13 @@ SafeSet<T>::operator SafeSet<U>() const
     SafeSet<U> res;
     res.insert(res.begin(), res.end());
     return res;
+}
+
+template <typename T>
+typename SafeSet<T>::iterator SafeSet<T>::find(T *item) const
+{
+    LockGuard lock(_mutex);
+    return _set.find(item);
 }
 
 template <typename T>
