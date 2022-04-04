@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 07:16:48 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 07:18:15 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ public:
     typedef typename std::set<T*>::const_reverse_iterator   const_reverse_iterator;
 
     SafeSet() {};
+    template <typename InputIterator>
+    SafeSet(InputIterator first, InputIterator last) : _set(first, last) {};
     SafeSet(const SafeSet& rhs) : _set(rhs._set) {};
     virtual ~SafeSet() {};
     SafeSet& operator=(const SafeSet& rhs) { _set = rhs._set; return *this; };
@@ -79,9 +81,7 @@ template <typename T>
 template <typename U>
 SafeSet<T>::operator SafeSet<U>() const
 {
-    SafeSet<U> res;
-    res.insert(this->begin(), this->end());
-    return res;
+    return SafeSet<U>(this->begin(), this->end());
 }
 
 template <typename T>
