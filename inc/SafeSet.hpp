@@ -56,7 +56,9 @@ public:
     template <typename U>
     void apply(void (*func)(U*));
 
+    void erase(iterator position);
     size_t erase(T *item);
+    
     bool insert(T *item);
     bool empty() const;
     void clear();
@@ -73,6 +75,13 @@ SafeSet<T>::operator SafeSet<U>() const
     SafeSet<U> res;
     res._set.insert(res._set.begin(), res._set.end());
     return res;
+}
+
+template <typename T>
+void SafeSet<T>::erase(iterator position)
+{
+    LockGuard lock(_mutex);
+    _set.erase(position);
 }
 
 template <typename T>
