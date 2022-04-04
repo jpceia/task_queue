@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:17:27 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 04:36:58 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:05:35 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CONDITIONVARIABLE_HPP
 
 # include <pthread.h>
-# include "Mutex.hpp"
+# include "sync/Mutex.hpp"
 
 namespace wm
 {

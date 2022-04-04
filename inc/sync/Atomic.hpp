@@ -6,15 +6,15 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 04:07:33 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 04:35:04 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:05:58 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ATOMIC_HPP
 # define ATOMIC_HPP
 
-# include "Mutex.hpp"
-# include "LockGuard.hpp"
+# include "sync/Mutex.hpp"
+# include "sync/LockGuard.hpp"
 
 namespace wm
 {

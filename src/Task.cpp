@@ -6,14 +6,14 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 06:07:11 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:02:00 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Task.hpp"
-#include "LockGuard.hpp"
-#include "SafeSet.hpp"
-#include "SafeQueue.hpp"
+#include "sync/LockGuard.hpp"
+#include "safe/Set.hpp"
+#include "safe/Queue.hpp"
 #include <iostream>
 #include <vector>
 

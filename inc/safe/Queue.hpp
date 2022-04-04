@@ -6,16 +6,16 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 07:36:31 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 08:58:40 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SAFEQUEUE_HPP
 # define SAFEQUEUE_HPP
 
-# include "Atomic.hpp"
-# include "Mutex.hpp"
-# include "ConditionVariable.hpp"
+# include "sync/Atomic.hpp"
+# include "sync/Mutex.hpp"
+# include "sync/ConditionVariable.hpp"
 # include <queue>
 # include <vector>
 

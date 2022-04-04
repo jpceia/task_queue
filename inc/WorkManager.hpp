@@ -6,19 +6,19 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 05:45:38 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:02:17 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WORKMANAGER_HPP
 # define WORKMANAGER_HPP
 
-# include "Mutex.hpp"
-# include "Atomic.hpp"
-# include "ConditionVariable.hpp"
+# include "sync/Mutex.hpp"
+# include "sync/Atomic.hpp"
+# include "sync/ConditionVariable.hpp"
+# include "safe/Set.hpp"
+# include "safe/Queue.hpp"
 # include "Task.hpp"
-# include "SafeSet.hpp"
-# include "SafeQueue.hpp"
 # include <vector>
 
 namespace wm

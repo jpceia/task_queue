@@ -6,13 +6,13 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 06:06:46 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:03:03 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Task.hpp"
-#include "SafeQueue.hpp"
-#include "Atomic.hpp"
+#include "sync/Atomic.hpp"
+#include "safe/Queue.hpp"
 #include "WorkManager.hpp"
 #include <iostream>
 

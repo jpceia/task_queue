@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 22:26:39 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 04:36:52 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:05:50 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LOCKGUARD_HPP
 
 # include <pthread.h>
-# include "Mutex.hpp"
+# include "sync/Mutex.hpp"
 
 namespace wm
 {

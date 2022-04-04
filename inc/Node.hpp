@@ -6,14 +6,14 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 06:35:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 06:01:46 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:01:26 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_HPP
 # define NODE_HPP
 
-# include "SafeSet.hpp"
+# include "safe/Set.hpp"
 # include <iostream>
 
 namespace wm

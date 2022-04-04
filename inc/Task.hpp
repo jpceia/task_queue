@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 06:00:02 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:01:34 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <vector>
 # include "Node.hpp"
-# include "SafeSet.hpp"
-# include "SafeQueue.hpp"
+# include "safe/Set.hpp"
+# include "safe/Queue.hpp"
 # include "BaseTask.hpp"
 
 namespace wm
