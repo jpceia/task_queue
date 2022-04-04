@@ -54,7 +54,9 @@ Node<T>::~Node()
 template <typename T>
 void Node<T>::addDependency(Node *node)
 {
-    if (static_cast<T*>(this)->isLocked())
+    if (node == this)
+        std::cerr << "Node::addDependency: Node cannot depend on itself" << std::endl;
+    else if (static_cast<T*>(this)->isLocked())
         std::cerr << "Node::addDependency: Cannot add dependency to locked node"
             << std::endl;
     else if (_dependencies.insert(node))
