@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 07:12:23 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 05:28:16 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ public:
     const_reverse_iterator rbegin() const { return _set.rbegin(); };
     const_reverse_iterator rend() const { return _set.rend(); };
 
+    template<typename U>
+    operator SafeSet<U>() const;
+
     template <typename U>
     SafeSet filter(bool (*predicate)(U*));
 
@@ -63,6 +66,14 @@ private:
     std::set<T*> _set;
 };
 
+template <typename T>
+template <typename U>
+SafeSet<T>::operator SafeSet<U>() const
+{
+    SafeSet<U> res;
+    res._set.insert(res._set.begin(), res._set.end());
+    return res;
+}
 
 template <typename T>
 size_t SafeSet<T>::erase(T *item)
