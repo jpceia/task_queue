@@ -30,7 +30,7 @@ public:
     static bool isReady(T *node) { return node->isReady(); };
     SafeSet<T> getDependents() const { return _dependents; };
 
-    void addDependency(T *node);
+    void addDependency(Node *node);
 
 protected:
     // Private attributes
@@ -52,7 +52,7 @@ Node<T>::~Node()
 }
 
 template <typename T>
-void Node<T>::addDependency(T *node)
+void Node<T>::addDependency(Node *node)
 {
     if (static_cast<T*>(this)->isLocked())
         std::cerr << "Node::addDependency: Cannot add dependency to locked node"
