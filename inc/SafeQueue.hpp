@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 05:59:30 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 07:36:31 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ public:
     T *pop();
     T *pop(const Atomic<bool>& wait);
     bool empty() const;
+    size_t size() const;
     void clear();
 
 private:
@@ -102,6 +103,13 @@ bool SafeQueue<T>::empty() const
 {
     LockGuard lock(_pushMtx);
     return _queue.empty();
+}
+
+template <typename T>
+size_t SafeQueue<T>::size() const
+{
+    LockGuard lock(_pushMtx);
+    return _queue.size();
 }
 
 template <typename T>
