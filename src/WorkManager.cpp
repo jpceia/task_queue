@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:23:03 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/02 06:31:10 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 06:06:46 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,11 @@ void WorkManager::pushTask(Task *task)
         std::cerr << "WorkManager::push_task() called with NULL task" << std::endl;
         return ;
     }
-    if (_working && task->isReady())
-    {
-        task->lock();
+    task->lock();
+    if (_working && task->isReady())   
         _taskQueue.push(task);
-    }
     else
-    {
         _taskPool.insert(task);
-    }
 }
 
 void WorkManager::pushTask(const std::vector<Task *>& tasks)

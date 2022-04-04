@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 06:03:41 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 06:07:11 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ bool Task::_moveIfReady(SafeSet<Task>& taskSet, SafeQueue<Task>& taskQueue)
     #ifdef DEBUG
     std::cout << "Task " << this->getId() << " is ready to pass to taskQueue" << std::endl;
     #endif
-    this->lock();
     if (!taskSet.erase(this))
     {
         #ifdef DEBUG
