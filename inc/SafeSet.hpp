@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 07:11:16 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 07:16:48 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ template <typename U>
 SafeSet<T>::operator SafeSet<U>() const
 {
     SafeSet<U> res;
-    res.insert(res.begin(), res.end());
+    res.insert(this->begin(), this->end());
     return res;
 }
 
