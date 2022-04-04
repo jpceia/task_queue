@@ -77,7 +77,7 @@ template <typename U>
 SafeSet<T>::operator SafeSet<U>() const
 {
     SafeSet<U> res;
-    res._set.insert(res._set.begin(), res._set.end());
+    res.insert(res.begin(), res.end());
     return res;
 }
 
