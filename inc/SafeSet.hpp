@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:42:45 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 06:56:04 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/04 07:11:16 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ public:
     void insert(InputIterator first, InputIterator last);
 
     bool empty() const;
+    size_t size() const;
     void clear();
 
 private:
@@ -124,6 +125,13 @@ bool SafeSet<T>::empty() const
 {
     LockGuard lock(_mutex);
     return _set.empty();
+}
+
+template <typename T>
+size_t SafeSet<T>::size() const
+{
+    LockGuard lock(_mutex);
+    return _set.size();
 }
 
 template <typename T>
