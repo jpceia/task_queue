@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 23:21:00 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 09:02:17 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/09 01:33:28 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ public:
     void start();
     void wait();
     void pushTask(Task* task);
-    void pushTask(const std::vector<Task *>& tasks);
+
+    template <typename InputIterator>
+    void pushTask(InputIterator first, InputIterator last);
 
 private:
     // Non-copyable

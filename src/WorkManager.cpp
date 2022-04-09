@@ -124,15 +124,15 @@ void WorkManager::pushTask(Task *task)
         _taskPool.insert(task);
 }
 
-void WorkManager::pushTask(const std::vector<Task *>& tasks)
+template <typename InputIterator>
+void WorkManager::pushTask(InputIterator first, InputIterator last)
 {
     if (!_acceptingWork)
     {
         std::cerr << "WorkManager::push_task() called while not accepting work" << std::endl;
         return ;
     }
-    for (std::vector<Task *>::const_iterator it = tasks.begin();
-        it != tasks.end(); ++it)
+    for (InputIterator it = first; it != last; ++it)
     {
         if (*it == NULL)
         {
