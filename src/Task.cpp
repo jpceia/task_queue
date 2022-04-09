@@ -6,7 +6,7 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:33:08 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 09:02:00 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/09 01:34:41 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "safe/Set.hpp"
 #include "safe/Queue.hpp"
 #include <iostream>
-#include <vector>
 
 
 namespace wm

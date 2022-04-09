@@ -6,14 +6,13 @@
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:11 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 09:01:34 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/09 01:30:36 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TASK_HPP
 # define TASK_HPP
 
-# include <vector>
 # include "Node.hpp"
 # include "safe/Set.hpp"
 # include "safe/Queue.hpp"

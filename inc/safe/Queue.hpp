@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   SafeQueue.hpp                                      :+:      :+:    :+:   */
+/*   Queue.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:20:57 by jpceia            #+#    #+#             */
-/*   Updated: 2022/04/04 08:58:40 by jpceia           ###   ########.fr       */
+/*   Updated: 2022/04/09 01:33:42 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "sync/Mutex.hpp"
 # include "sync/ConditionVariable.hpp"
 # include <queue>
-# include <vector>
 
 namespace wm
 {
